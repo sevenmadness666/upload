@@ -1,0 +1,75 @@
+.topban{width: 100%;height: auto;margin:0; }
+
+.rs2018page .tab{width: 100%; height: auto; display: inline-block; vertical-align: top; margin: -2px 0 0 0; }
+
+.typkgame_main{
+    width: 100%;
+    min-height: 500px;
+    margin: -700px auto 0 auto;
+}
+.tab-nav_typkgame {
+    height: 50px; overflow: hidden; position: absolute; z-index: 1; width:100%; background: #616161; border-bottom: 1px solid #a7a7a7; }
+.tab-nav_typkgame a {
+    width: calc(100%/2);
+    float: left;
+    line-height: 50px;
+    height:50px;
+    display: inline-block;
+    text-align:center;
+    text-decoration:none;
+    color: #dedede;
+    letter-spacing: 1px;
+    font-size: 15px;
+    transition: 400ms; -moz-transition: 400ms; -webkit-transition: 400ms; -o-transition: 400ms; -ms-transition: 400ms;
+}
+.tab-nav_typkgame a.current , .tab-nav_typkgame a:hover{
+    color: #ffffff; background: #2A8FBD;
+}
+.tab-con_typkgame {position:relative; width:100%; background: #ffffff;}
+/*.tpgline{
+    width: 100%;
+    margin: 12px auto;
+    clear: both;
+    border-top: 1px solid #e6e6e6;
+}*/
+.typkgame_box{width: 100%; margin:50px auto 0px auto;}
+.typkgame_box h1{color: #2A8FBD; font-size:17px; font-weight: 600;margin: 4px 0 20px 0;}
+.typkgame_box h1 span{color: #a5a5a5; font-size: 14px; font-weight: 600; padding-left: 8px; }
+.typkgame_box h3{font-size: 15px; line-height: 26px; color: #2A8FBD; margin-top: 10px; font-weight: 600; }
+.typkgame_box p{font-size: 14px; line-height: 26px; color: #686868; }
+.typkgame_box ol{}
+.typkgame_box ol li{font-size: 14px; margin-left: 15px; line-height: 30px; color: #686868; }
+.typkgame_box ol li span{color: #ec8500; font-weight: 600; }
+.typkgame_box.form_page{font-size: 0;text-align: center;padding: 4% 1%;}
+.typkgame_box.form_page img{
+    display: inline-block;vertical-align: top;
+    width: 48%;margin: 0 1% 4% 1%;
+}
+/*琛ㄦ牸*/
+.table_typkgame {
+    border-collapse:collapse;
+    overflow:hidden;
+    text-align:center;
+    margin: 40px 0 20px 0;
+    border: 1px solid #cccccc;
+}
+.table_typkgame thead tr , .table_typkgame thead th{
+    background: #2A8FBD; padding:13px 0; font-size:15px; color:#fff; font-weight: 600; border: 1px solid #cccccc;
+}
+.table_typkgame tr td {border: 1px solid #cccccc; }
+.w50 tr td {width: 50%;}
+.w25 tr td {width: 25%;}
+.table_typkgame td {min-width: 40px; font-size:13px; padding:12px 0; vertical-align: middle; }
+.table_typkgame tr td span { /*鐗瑰垾绐佸嚭鐢�*/
+    color: #00b3e0; font-size: 14px; font-weight: 600; }
+.table_typkgame tbody {color:#686868;}
+.table_style1 div {background: url(../images/activity/flag.png) no-repeat; display: inline-block; border: 1px solid #fff; margin: 0 5px; vertical-align: text-bottom; }
+.noWat{color: #18b7ff; font-weight: 600;cursor: pointer;}
+.noWat_box{display: none;}
+.noWat_box .btn{background: none; border: 1px solid rgba(255, 255, 255, 0.5); margin: 0 0 20px 0; }
+.noWat_box .btn:hover{background: none; }
+
+/*琛ㄦ牸*/
+.table_style1 td {padding: 18px 0; }
+.tb_ic{width: 36px; height: 36px; position: absolute; margin: -24px 0 0 8px; }
+.tb_ic img{width: 100%;}

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <title>添运国际手机版</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+    <meta name="HandheldFriendly" content="true">
+
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="shortcut icon" href="images/favicon.png">
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css?v3">
+    <link type="text/css" rel="stylesheet" href="css/page.css?v9">
+    <link type="text/css" rel="stylesheet" href="css/user.css?v4">
+    <link type="text/css" rel="stylesheet" href="css/main.css?v1">
+
+    <script src="js/jquery-1.8.3.min.js"></script><!-- 1.8.3 -->
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.lazyload.min.js"></script><!-- 延时载入 -->
+    <script src="js/tabs.js"></script><!-- tabs -->
+    <!--   <script src="js/socket.io.js?v1"></script> -->
+    <script type="text/javascript">
+        // function alert_box(message, showbutton = 'true', confirm = 'false'){//show确定、取消按钮
+        function alert_box(message, showbutton, confirm ){//show确定、取消按钮
+            if (showbutton == 'false') {
+                $('#pop_button_check').css('display','none');
+                $('#pop_button_cancel_x').css('display','none');
+            }else{
+                $("#pop_button_check").css('display','');
+                $('#pop_button_cancel_x').css('display','');
+            }
+            if (showbutton == 'true' && confirm == 'true') {
+                $("#pop_button_cancel").css('display','');
+            }else{
+                $("#pop_button_cancel").css('display','none');
+            }
+            $(".pop_bg , .Pop-up").fadeIn('350');
+            setTimeout(function(){ $('#pop_text').html(message); }, 300);
+        }
+        $(function(){
+            var page_name = location.pathname;
+            if(page_name == "/tymobile_new/user.php"){
+                $(".back").hide();
+            }
+        });
+
+        //socket detect
+        var device = "phone";
+
+    </script></head>
+
+
+
+<body>
+
+<header class="top_login">
+    <div class="back" onclick="history.back();"><i class="fa fa-chevron-left"></i>返回</div>
+    <div class="logo" onclick="javascript:void(0);location.href='user.php'"></div>
+    <div class="top_right">
+        <i class="fa fa-database"></i>
+        <p id="main_ccl">0.00</p>
+    </div>
+</header>
+
+
+<a href="javascript:" id="go_top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a><!-- 返回顶端 -->
+
+<main class="main user">
+    <table width="100%" border="0" id="table_record" class="table_record" style="display: table;">
+        <thead></thead>
+        <tbody><tr><td colspan="9"><div class="no_data">暂无任何记录！</div></td></tr></tbody>
+        <tfoot></tfoot>
+    </table>
+
+
+</main>
+<script>
+    $(function(){
+        // $("#table_record").hide();
+        get_record();
+    });
+
+    function number_format (number, decimals, dec_point, thousands_sep) {
+        number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+        var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            s = '',
+            toFixedFix = function (n, prec) {
+                var k = Math.pow(10, prec);
+                return '' + Math.round(n * k) / k;
+            };
+        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+        if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+        }
+        return s.join(dec);
+    }
+
+    function get_record(){
+
+        var valid = true;
+        var mesg ='';
+        if(valid){
+            $.ajax({
+                url: "../ty/u_bet_rollback_ajax",
+                data: "",
+                type: "POST",
+                dataType:"json",
+                success: function( d ) {
+                    $('#wait').hide();
+                    $("#table_record").show();
+                    console.log(d);
+                    if (d == null){
+                        $('#table_record tbody').append('<tr><td colspan="9"><div class="no_data">暂无任何记录！</div></td></tr>');
+                    }else{
+                        var type_html ='';
+                        var type_html2 ='';
+                        var totalturnover = 0;
+                        var totalrollover = 0;
+                        var totalbetreslut = 0;
+                        $.each(d, function(index, val) {
+                            betreslut = val['rollover'].total-val['turnover'];
+                            type_html ='<hr>'+
+                                '<ul>'+
+                                '<li>' +
+                                '<h3>时间:&nbsp;</h3>' +
+                                '<h4>' + val['starttime'] +'~'+val['endtime']+ '</h4>' +
+                                '</li>'+
+                                '<li>' +
+                                '<h3>交易码:&nbsp;</h3>' +
+                                '<h4>' + index + '</h4>' +
+                                '</li>'+
+                                '<li>' +
+                                '<h3>类型:&nbsp;</h3>' +
+                                '<h4>' + val['fundindex'] + '</h4>' +
+                                '</li>'+
+                                '<li>' +
+                                '<h3>金额:&nbsp;</h3>' +
+                                '<h4>' + number_format(val['amountlocal'],2) + '</h4>' +
+                                '</li>'+
+                                '<li>' +
+                                '<h3>倍数:&nbsp;</h3>' +
+                                '<h4>' + val['multiply'] + '</h4>' +
+                                '</li>'+
+                                '<li>' +
+                                '<h3>现金优惠:&nbsp;</h3>' +
+                                '<h4>' + val['promosimplified'] + '</h4>' +
+                                '</li>'+
+                                '<li>' +
+                                '<h3>注额需求:&nbsp;</h3>' +
+                                '<h4>' + number_format(val['turnover'],2) + '</h4>' +
+                                '</li>'+
+                                '<li>' +
+                                '<h3>当前注额:&nbsp;</h3>' +
+                                '<h4>' + number_format(val['rollover'].total,2) + '</h4>' +
+                                '</li>'+
+                                '<li>' +
+                                '<h3>注额需求剩馀:&nbsp;</h3>' +
+                                '<h4>' + number_format(betreslut,2) + '</h4>' +
+                                '</li>'+
+                                '</ul>';
+                            totalturnover += Number(val['turnover']);
+                            totalrollover += val['rollover'].total;
+                            totalbetreslut += betreslut;
+
+                            $('#table_record tbody').append(type_html);
+                        });
+                        type_html2 ='<hr>'+
+                            '<ul>'+
+                            '<li>' +
+                            '<h3>总注额需求:&nbsp;</h3>' +
+                            '<h4>' + number_format(totalturnover,2) + '</h4>' +
+                            '</li>'+
+                            '<li>' +
+                            '<h3>总当前注额:&nbsp;</h3>' +
+                            '<h4>' + number_format(totalrollover,2) + '</h4>' +
+                            '</li>'+
+                            '<li>' +
+                            '<h3>总注额剩馀需求:&nbsp;</h3>' +
+                            '<h4>' + number_format(totalbetreslut,2) + '</h4>' +
+                            '</li>'+
+                            '</ul>';
+                        $('#table_record tfoot').append(type_html2);
+                    }
+                }
+            });
+        }
+    }
+</script>
+
+<!-- 底部导航 -->
+<footer>
+    <ul>
+        <li onclick="javascript:void(0);location.href='user.php'"><i class="fa fa-home"></i><p>首页</p></li>
+        <li onclick="javascript:void(0);location.href='user_deposit.php'"><i class="fa fa-credit-card"></i><p>充值</p></li>
+        <li onclick="cs()"><a class="cs_str" href="https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&amp;configID=49259&amp;jid=2028701177&amp;s=1&amp;lan=zh" target="_blank"><i class="fa fa-commenting"></i><p>客服</p></a></li>
+        <li onclick="javascript:void(0);location.href='user_myaccount.php'"><i class="fa fa-user-circle"></i><p>我的</p></li>
+    </ul>
+</footer>
+<div class="page_bg"></div>
+
+
+
+<!-- 弹窗 -->
+<div class="pop_bg"></div>
+<div id="all_pop"></div>
+<div class="Pop-up pop_close">
+    <div class="btn_close pop_cls close_event" id="pop_button_cancel_x"><i class="fa fa-times"></i></div>
+    <p id="pop_text">　　</p>
+    <button id="pop_button_check" value="cnfrm_yes" class="method_btn">确定</button>
+    <button id="pop_button_cancel" value="cnfrm_no" class="method_btn">取消</button>
+</div>
+<!-- 弹窗 -->
+
+<!-- 弹窗 -->
+<script>
+    $(".pop_bg , .close_event , .Pop-up button").on('click', function() {
+        // setTimeout(function(){ $('#pop_text').text('　　'); }, 300);
+        $(".pop_bg").fadeOut('350');
+        $(".pop_close").fadeOut('350');
+
+
+    });
+
+</script>
+<!-- 弹窗 -->
+
+<!-- cs -->
+<script>
+    $(function(){
+        cs();//第一次cs聯絡資訊
+        agent();
+    })
+    function cs(){
+        var cs_str = "https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&configID=49259&jid=2028701177&s=1&lan=zh";
+        $('.cs_str').attr({
+            href: cs_str,
+            target: '_blank'
+        });
+    }
+    function agent(){
+        var agent_str = "https://ty7776.com/agent/";
+        $('.agent_str').attr({
+            href: agent_str,
+            target: '_blank'
+        });;
+    }
+</script>
+<!-- cs -->
+
+<!-- 頁面切換 -->
+<script type="text/javascript">
+
+    function load_page(page_name){
+        $(window).scrollLeft("0");
+        $(window).scrollTop("0");
+        $(".main").load(page_name);
+        $.ajax({
+            url: '../../ty/station_msg_ajax.php',
+            type: 'POST',
+            dataType: 'json',
+            async:false,
+            data: {
+                from: 'mobile_find',
+                id: '337451',
+            },
+        })
+            .done(function(d) {
+                console.log(d.msg);
+                if (d.msg == 'is_read') {
+                    $('.station').removeClass('fa-info-circle');
+                }else if (d.msg == 'not_read') {
+                    $('.station').addClass('fa-info-circle');
+                }
+                console.log("success");
+            })
+            .fail(function() {
+                console.log("error");
+            });
+
+    }
+</script>
+
+<!-- 登入注册tab -->
+<script>
+    $(function() {
+        $(document).on("click", '#logout', function(){
+            $.ajax({
+                url: 'api/function/check.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {type:'logout'}
+            })
+                .done(function() {
+                    console.log("success");
+                    location.href='./index.php'
+                })
+                .fail(function() {
+                    console.log("error logout");
+                })
+        });
+
+        $.ajax({
+            url: '../ty/u_transfer-ajax?com=main',
+            type: 'POST',
+            dataType: 'json',
+            data : {com : "main"}
+        })
+            .done(function(d) {
+                if(parseInt(d.total)>=0) {
+                    $("#main_ccl").text(d.total)
+                } else {
+                    $("#main_ccl").text("00.0")
+                }
+            })
+
+        $(document).on("click", '.go_tsfBtn', function(){
+            maintenance_from = 'down_tran';
+            $(".go_tsfBtn").attr('disabled','disabled');
+            var ein = document.getElementById("walletin");
+            var comin = ein.options[ein.selectedIndex].value;
+            var eout = document.getElementById("walletout");
+            var comout = eout.options[eout.selectedIndex].value;
+            var fr_transfer_amt=$("#fr_transfer_amt").val();
+            var tmp_fr_gamefrom=comin;
+            var tmp_fr_gameto=comout;
+
+            if( comin=='0') {
+                tmp_fr_gamefrom='main';
+            }
+            if( comout=='0') {
+                tmp_fr_gameto='main';
+            }
+
+            maintenance(tmp_fr_gamefrom);
+            maintenance_status_from = tmp_maintenance_status;
+            maintenance(tmp_fr_gameto);
+            maintenance_status_to   = tmp_maintenance_status;
+
+            if (maintenance_status_from == 'fail' || maintenance_status_to == 'fail') {
+                var tmp_m_str = '';
+                if (maintenance_status_from == 'fail') {
+                    tmp_m_str = tmp_fr_gamefrom;
+                }else{
+                    tmp_m_str = tmp_fr_gameto;
+                }
+
+                alert_box(tmp_m_str + '平台維護中','true','false');
+
+            } else if ( tmp_fr_gamefrom == tmp_fr_gameto) {
+                alert_box('请选择不同的平台转帐','true','false');
+
+            }else{
+
+                $.ajax({
+                    url: '../ty/u_transfer-action',
+                    type: 'POST',
+                    dataType: 'json',
+                    async : false,
+                    data: {
+                        fr_transfer_type : 'transfer',
+                        fr_gamefrom : comin,
+                        fr_gameto : comout,
+                        fr_transfer_amt : fr_transfer_amt}
+                })
+                    .done(function(d) {
+                        if(d.error==false) {
+                            var tmp_switch = maintenance_switch;
+                            if (maintenance_switch == 'auto' &&  maintenance_from == 'down_tran') {
+                                maintenance_switch = 'hand';
+                            }
+                            getccl(tmp_fr_gameto);
+                            getccl(tmp_fr_gamefrom);
+                            if (tmp_switch == 'auto' && maintenance_from == 'down_tran') {
+                                maintenance_switch = 'auto';
+                            }
+                            alert_box("转帐成功",'true','false');
+                        } else {
+                            alert_box(d.msg,'true','false');
+                        }
+
+
+                    })
+            }
+
+            name_arr=[];
+            name_arr['0']='【中心钱包】';
+            name_arr['bbin']='【BB波音平台】';
+            name_arr['ag_ag']='【AG环亚平台】';
+            name_arr['mg']='【MG摩卡平台】';
+            name_arr['avia']='【OG東方平台】';
+            name_arr['pteurope']='【PT电子】';
+            name_arr['hb']='【HB电子】';
+            name_arr['nt']='【NT电子】';
+            name_arr['allbet']='【AllBet欧博平台】';
+            name_arr['inteplay']='【INTEPLAY电子】';
+            name_arr['gg']='【GG捕鱼】';
+            name_arr['qt']='【QT电子】';
+            name_arr['ibc']='【IBC沙巴】';
+            name_arr['ttg']='【TTG电子】';
+            maintenance_from = '';
+            tmp_maintenance_status = '';
+            $(".go_tsfBtn").attr('disabled', false);
+        });
+    });
+
+    var maintenance_switch = 'hand';
+    var maintenance_from = '';
+
+    function getccl(com){
+        if (maintenance_switch == 'hand') {
+            maintenance(com);
+        }
+        var tmp_status = $('#'+com+'_ccl').attr('data-status');
+        if (tmp_status == 'working' || maintenance_switch == 'hand' ) {
+            $.ajax({
+                url: '../ty/u_transfer-ajax?com='+com,
+                type: 'POST',
+                dataType: 'json',
+                data : {com :com}
+            })
+                .done(function(d) {
+                    if (com == 'main') {
+                        $("#"+com+"_ccl").text(d.total);
+                    }else{
+                        if (tmp_status != 'working') {
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("维护中");
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').css("color","#ff932b");
+                        }else if(parseInt(d.total)>=0){
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text(d.total);
+                        }else{
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("系统异常");
+                        }
+                        $("#"+com+"_ccl").parent().find('i').removeClass('fa-spin');
+                    }
+                })
+                .fail(function() {
+                    console.log("fail");
+                })
+        }else{
+            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("维护中");
+            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').css("color","#ff932b");
+            $("#"+com+"_ccl").parent().find('i').removeClass('fa-spin');
+        }
+    }
+
+    var  tmp_maintenance_status = '';//用来存下方转帐判断有无维护用
+
+    function maintenance(com){
+        $.ajax({
+            url: 'api/function/maintenance.php',
+            type: 'POST',
+            dataType: 'json',
+            async:false,
+            data: {com: com}
+        })
+            .done(function(d) {
+                if ( com  == 'all') {//我的 => 转帐
+                    $.each(d.data, function(index, val) {
+                        $.each(val, function(s_index, s_val) {
+                            $('#'+s_index+'_ccl').attr('data-status', s_val);
+                        });
+                    });
+                }else{//用来存下方转帐判断有无维护用
+                    if (d.success == true) {
+                        tmp_maintenance_status = 'success';
+                    }else{
+                        tmp_maintenance_status = 'fail';
+                    }
+                }
+
+            })
+    }
+
+    function window_open(url){
+        wdth = $(window).width();
+        height = $(window).height();
+        window.open(url,'blank','width='+wdth,'height='+height);
+
+    }
+
+</script>
+
+<script type="text/javascript" src="js/index.js"></script>
+
+
+<!-- app open -->
+<script src="https://static.ydbimg.com/API/YdbOnline.js"></script>
+<script>
+    function openbrowser(url){
+        var YDB = new YDBOBJ();
+        YDB.OpenWithSafari(url);
+        console.log(url);
+    }
+    $(document).on('click', '.app_open', function(event) {
+        var tmp_url = $(this).attr('data-href');
+        $.get(tmp_url, function(data) {
+            // console.log(data);
+            openbrowser(data);
+        });
+        event.preventDefault();
+    });
+    $(document).on('click', '.app_open_bb', function(event) {
+        var tmp_url = $(this).attr('data-href');
+        $.get(tmp_url, function(data) {
+            tmp = data.replace(/\"/g,"'");
+            tmp = btoa(tmp);
+            tmp = tmp.replace(/\+/g,"_");
+            // console.log(tmp);
+            var data_url = location.protocol+"//vip77765.com/tymobile_new/redirect.php?u="+tmp;
+            openbrowser(data_url);
+        });
+        event.preventDefault();
+    });
+    //cnzz
+    var cz = document.createElement("script");
+    cz.src = "//s11.cnzz.com/z_stat.php?id=1261102673&web_id=1261102673";
+    document.getElementsByTagName('body')[0].appendChild(cz);
+
+    function reset_wallet(){
+        $("#walletin,#walletout").html("");
+        $.each(plate_arr, function(index, val) {
+            if (index==0) {
+                $("#walletin").append(val);
+            }else{
+                $("#walletout,#walletin").append(val);
+            }
+        });
+    }
+
+</script>
+<!-- app open -->
+
+
+
+</body></html>

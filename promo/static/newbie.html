@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <title>添运国际手机版</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+    <meta name="HandheldFriendly" content="true">
+
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="shortcut icon" href="images/favicon.png">
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css?v3">
+    <link type="text/css" rel="stylesheet" href="css/page.css?v9">
+    <link type="text/css" rel="stylesheet" href="css/user.css?v4">
+    <link type="text/css" rel="stylesheet" href="css/main.css?v1">
+
+    <script src="js/jquery-1.8.3.min.js"></script><!-- 1.8.3 -->
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.lazyload.min.js"></script><!-- 延时载入 -->
+    <script src="js/tabs.js"></script><!-- tabs -->
+    <!--   <script src="js/socket.io.js?v1"></script> -->
+    <script type="text/javascript">
+        // function alert_box(message, showbutton = 'true', confirm = 'false'){//show确定、取消按钮
+        function alert_box(message, showbutton, confirm ){//show确定、取消按钮
+            if (showbutton == 'false') {
+                $('#pop_button_check').css('display','none');
+                $('#pop_button_cancel_x').css('display','none');
+            }else{
+                $("#pop_button_check").css('display','');
+                $('#pop_button_cancel_x').css('display','');
+            }
+            if (showbutton == 'true' && confirm == 'true') {
+                $("#pop_button_cancel").css('display','');
+            }else{
+                $("#pop_button_cancel").css('display','none');
+            }
+            $(".pop_bg , .Pop-up").fadeIn('350');
+            setTimeout(function(){ $('#pop_text').html(message); }, 300);
+        }
+        $(function(){
+            var page_name = location.pathname;
+            if(page_name == "/tymobile_new/user.php"){
+                $(".back").hide();
+            }
+        });
+
+        //socket detect
+        var device = "phone";
+
+    </script></head>
+
+
+
+<body>
+
+<header class="top_login">
+    <div class="back" onclick="history.back();"><i class="fa fa-chevron-left"></i>返回</div>
+    <div class="logo" onclick="javascript:void(0);location.href='user.php'"></div>
+    <div class="top_right">
+        <i class="fa fa-database"></i>
+        <p id="main_ccl">0.00</p>
+    </div>
+</header>
+
+
+
+<main class="main newbie">
+
+    <!-- 如何充值 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>如何充值</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>点击下方充值</p>
+            <img src="images/newbie/dps_01.jpg" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>选择一个充值方式，并关注注意事项</p>
+            <img src="images/newbie/dps_02.jpg" width="100%">
+        </div>
+    </div>
+
+    <!-- 防劫持教学(苹果手机) -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>防劫持教学(苹果手机)</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>打开「设置」应用程序。点击「无线局域网」进入 Wi-Fi 列表，并选择连接上可用的 Wi-Fi 网络。</p>
+            <img src="images/newbie/dns_IOS01.jpg" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>连接上可用的 Wi-Fi 网络后，然后点击 Wi-Fi 网络名称右方的「显示信息」按钮(字母「i」)。</p>
+            <img src="images/newbie/dns_IOS02.jpg" width="100%">
+            <h2><span>03</span><strong>第三步:</strong></h2>
+            <p>在该 Wi-Fi 网络详情部分向下滚动，找到「DNS」选项部分。</p>
+            <img src="images/newbie/dns_IOS03.jpg" width="100%">
+            <h2><span>04</span><strong>第四步:</strong></h2>
+            <p>接下来在弹出的键盘上输入你需要更改后的 DNS 数值.本例子中我们使用 Google 提供的 8.8.8.8</p>
+            <img src="images/newbie/dns_IOS04.jpg" width="100%">
+            <h2><span>05</span><strong>第五步:</strong></h2>
+            <p>点击页面左上角的「Wi-Fi」按钮，即可退出 DNS 设置。就这样，DNS 的设置已成功更改，但可能还没有 立即生效。为了使得设备的 DNS 设置更改生效，你可能需要重新启动你的 iOS 设备，否则旧的 DNS 设置可 能还存储在缓存中。</p>
+        </div>
+    </div>
+
+    <!-- 防劫持教学(安卓手机) -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>防劫持教学(安卓手机)</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>点击设定&amp;设置</p>
+            <img src="images/newbie/dns_Ad01.jpg" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>点击Wi-Fi选项</p>
+            <img src="images/newbie/dns_Ad02.jpg" width="100%">
+            <h2><span>03</span><strong>第三步:</strong></h2>
+            <p>在wifi列表中，选择已经连接的wifi名称，长按之后在弹出来的提示选择“修改网络配置”</p>
+            <img src="images/newbie/dns_Ad03.jpg" width="100%">
+            <h2><span>04</span><strong>第四步:</strong></h2>
+            <p>选择“显示高级选项”--将IP设定--改成静止</p>
+            <img src="images/newbie/dns_Ad04.jpg" width="100%">
+            <h2><span>05</span><strong>第五步:</strong></h2>
+            <p>将DNS1改成8.8.8.8。然后将DNS2改成8.8.4.4保存即可</p>
+            <img src="images/newbie/dns_Ad05.jpg" width="100%">
+        </div>
+    </div>
+
+    <!-- 支付宝转银行卡 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>支付宝转银行卡</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <img src="images/newbie/AlypTh_01.jpg?v2" width="100%">
+        </div>
+    </div>
+
+    <!-- 微信转帐银行卡 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>微信转帐银行卡</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>点击下方充值</p>
+            <img src="images/newbie/dps_01.jpg" width="100%">
+            <img src="images/newbie/WchTh_02.jpg" width="100%">
+        </div>
+    </div>
+
+    <!-- 银联支付使用教学 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>银联支付使用教学</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>银联钱包APP下载</p>
+            <p>IOS版本：App Store搜索银联钱包<br>Android版本：各大应用市场搜索银联钱包</p>
+            <img src="images/newbie/elpayth_01.png" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>注册并登入</p>
+            <img src="images/newbie/elpayth_02.png" width="100%">
+            <h2><span>03</span><strong>第三步:</strong></h2>
+            <p>绑定银行卡，选择卡管家 → 卡列表 → 添加银行卡 → 添加一张新卡</p>
+            <p>信用卡和储蓄卡皆可添加</p>
+            <img src="images/newbie/elpayth_03.png" width="100%">
+            <h2><span>04</span><strong>第四步:</strong></h2>
+            <p>开通银联支付</p>
+            <p>有些用户虽然已绑卡，但是并未开通银联支付，所以会导致银联二维码支付不成功</p>
+            <img src="images/newbie/elpayth_04.png" width="100%">
+        </div>
+    </div>
+
+    <!-- 钱包转帐 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>钱包转帐</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>于下方点击我的</p>
+            <img src="images/newbie/user_01.jpg" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>选择转帐</p>
+            <img src="images/newbie/tsf_01.jpg" width="100%">
+            <h2><span>03</span><strong>第三步:</strong></h2>
+            <p>选择转出转入平台，选择完金额后点确认转帐</p>
+            <img src="images/newbie/tsf_02.jpg" width="100%">
+        </div>
+    </div>
+
+    <!-- 如何抢红包 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>如何抢红包</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>于首页点击抢红包</p>
+            <img src="images/newbie/honb_01.jpg" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>进入抢红包画面后，符合资格即可游戏，下方也有活动说明可以观看</p>
+            <img src="images/newbie/honb_02.jpg" width="100%">
+        </div>
+    </div>
+
+    <!-- 备用线路与测速 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>备用线路与测速</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>于首页选择线路导航</p>
+            <img src="images/newbie/tynav_01.jpg" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>选择一个最快速的线路前往</p>
+            <img src="images/newbie/tynav_02.jpg" width="100%">
+        </div>
+    </div>
+
+    <!-- APP下载 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>APP下载</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>于首页点击"APP下载区"</p>
+            <img src="images/newbie/app_dw_01.jpg" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>进入下载区后，选择想下载的APP</p>
+            <img src="images/newbie/app_dw_02.jpg" width="100%">
+        </div>
+    </div>
+
+    <!-- 避免使用无痕/私密浏览 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>避免使用无痕/私密浏览</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <p>使用无痕/私密浏览 会导致IOS苹果系统在游戏中跳出错误，所以您必须要关闭私密浏览</p>
+            <br>
+            <p>您可以在 "设置"-&gt; "Safari" -&gt; "私密浏览" 中更改此项设置</p>
+        </div>
+    </div>
+
+    <!-- 绑定银行卡 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>绑定银行卡</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>于下方点击我的</p>
+            <img src="images/newbie/user_01.jpg" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>点击银行卡</p>
+            <img src="images/newbie/bdcard_01.jpg" width="100%">
+            <h2><span>03</span><strong>第三步:</strong></h2>
+            <p>将资料填写完善後，点击确认绑定</p>
+            <img src="images/newbie/bdcard_02.jpg" width="100%">
+        </div>
+    </div>
+
+
+    <!-- 如何提现 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>如何提现</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>于下方点击我的</p>
+            <img src="images/newbie/user_01.jpg" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>点击提现</p>
+            <img src="images/newbie/wdrl_01.jpg" width="100%">
+            <h2><span>03</span><strong>第三步:</strong></h2>
+            <p>进入后，输入金额与提现密码(您在添运的密码)，完成后按提交</p>
+            <img src="images/newbie/wdrl_02.jpg" width="100%">
+        </div>
+    </div>
+
+    <!-- 如何查流水 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>如何查流水</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>于下方点击我的</p>
+            <img src="images/newbie/user_01.jpg" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>点击流水纪录</p>
+            <img src="images/newbie/cls_01.jpg" width="100%">
+        </div>
+    </div>
+
+    <!-- 修改密码 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>修改密码</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>于下方点击我的</p>
+            <img src="images/newbie/user_01.jpg" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>点击帐户中心</p>
+            <img src="images/newbie/pswd_01.jpg" width="100%">
+            <h2><span>03</span><strong>第三步:</strong></h2>
+            <p>点击修改密码，填写好新旧密码后按确认修改</p>
+            <img src="images/newbie/pswd_02.jpg" width="100%">
+        </div>
+    </div>
+
+    <!-- 绑定六合幸运码 -->
+    <div class="newbie_box">
+        <div class="newbie_tit">
+            <h1>绑定六合幸运码</h1>
+            <div class="nsb_action">
+                <a href="#">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="newbie_in">
+            <div class="line"></div>
+            <h2><span>01</span><strong>第一步:</strong></h2>
+            <p>于下方点击我的</p>
+            <img src="images/newbie/user_01.jpg" width="100%">
+            <h2><span>02</span><strong>第二步:</strong></h2>
+            <p>点击帐户中心</p>
+            <img src="images/newbie/pswd_01.jpg" width="100%">
+
+            <h2><span>03</span><strong>第三步:</strong></h2>
+            <p>点击"六合幸运码"，填入想绑定之数字，或选自动生成号码，选玩号码后点"确认绑定"</p>
+            <img src="images/newbie/lotto.jpg" width="100%">
+        </div>
+    </div>
+
+</main>
+
+
+<script type="text/javascript">
+    $(function unfoldPost() {
+        var actionButton = $(".newbie_tit");
+        actionButton.on("click", function(e) {
+            e.preventDefault();
+            $(this).closest(".newbie_box").toggleClass("triggered");
+            $(this).closest(".nsb_action").toggleClass("triggered");
+            $(".no_count").fadeOut(350);//關閉優惠也關閉不计算名单
+        });
+    });
+</script>
+
+
+<!-- 底部导航 -->
+<footer>
+    <ul>
+        <li onclick="javascript:void(0);location.href='user.php'"><i class="fa fa-home"></i><p>首页</p></li>
+        <li onclick="javascript:void(0);location.href='user_deposit.php'"><i class="fa fa-credit-card"></i><p>充值</p></li>
+        <li onclick="cs()"><a class="cs_str" href="https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&amp;configID=49259&amp;jid=2028701177&amp;s=1&amp;lan=zh" target="_blank"><i class="fa fa-commenting"></i><p>客服</p></a></li>
+        <li onclick="javascript:void(0);location.href='user_myaccount.php'"><i class="fa fa-user-circle"></i><p>我的</p></li>
+    </ul>
+</footer>
+<div class="page_bg"></div>
+
+
+
+<!-- 弹窗 -->
+<div class="pop_bg"></div>
+<div id="all_pop"></div>
+<div class="Pop-up pop_close">
+    <div class="btn_close pop_cls close_event" id="pop_button_cancel_x"><i class="fa fa-times"></i></div>
+    <p id="pop_text">　　</p>
+    <button id="pop_button_check" value="cnfrm_yes" class="method_btn">确定</button>
+    <button id="pop_button_cancel" value="cnfrm_no" class="method_btn">取消</button>
+</div>
+<!-- 弹窗 -->
+
+<!-- 弹窗 -->
+<script>
+    $(".pop_bg , .close_event , .Pop-up button").on('click', function() {
+        // setTimeout(function(){ $('#pop_text').text('　　'); }, 300);
+        $(".pop_bg").fadeOut('350');
+        $(".pop_close").fadeOut('350');
+
+
+    });
+
+</script>
+<!-- 弹窗 -->
+
+<!-- cs -->
+<script>
+    $(function(){
+        cs();//第一次cs聯絡資訊
+        agent();
+    })
+    function cs(){
+        var cs_str = "https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&configID=49259&jid=2028701177&s=1&lan=zh";
+        $('.cs_str').attr({
+            href: cs_str,
+            target: '_blank'
+        });
+    }
+    function agent(){
+        var agent_str = "https://ty7776.com/agent/";
+        $('.agent_str').attr({
+            href: agent_str,
+            target: '_blank'
+        });;
+    }
+</script>
+<!-- cs -->
+
+<!-- 頁面切換 -->
+<script type="text/javascript">
+
+    function load_page(page_name){
+        $(window).scrollLeft("0");
+        $(window).scrollTop("0");
+        $(".main").load(page_name);
+        $.ajax({
+            url: '../../ty/station_msg_ajax.php',
+            type: 'POST',
+            dataType: 'json',
+            async:false,
+            data: {
+                from: 'mobile_find',
+                id: '337451',
+            },
+        })
+            .done(function(d) {
+                console.log(d.msg);
+                if (d.msg == 'is_read') {
+                    $('.station').removeClass('fa-info-circle');
+                }else if (d.msg == 'not_read') {
+                    $('.station').addClass('fa-info-circle');
+                }
+                console.log("success");
+            })
+            .fail(function() {
+                console.log("error");
+            });
+
+    }
+</script>
+
+<!-- 登入注册tab -->
+<script>
+    $(function() {
+        $(document).on("click", '#logout', function(){
+            $.ajax({
+                url: 'api/function/check.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {type:'logout'}
+            })
+                .done(function() {
+                    console.log("success");
+                    location.href='./index.php'
+                })
+                .fail(function() {
+                    console.log("error logout");
+                })
+        });
+
+        $.ajax({
+            url: '../ty/u_transfer-ajax?com=main',
+            type: 'POST',
+            dataType: 'json',
+            data : {com : "main"}
+        })
+            .done(function(d) {
+                if(parseInt(d.total)>=0) {
+                    $("#main_ccl").text(d.total)
+                } else {
+                    $("#main_ccl").text("00.0")
+                }
+            })
+
+        $(document).on("click", '.go_tsfBtn', function(){
+            maintenance_from = 'down_tran';
+            $(".go_tsfBtn").attr('disabled','disabled');
+            var ein = document.getElementById("walletin");
+            var comin = ein.options[ein.selectedIndex].value;
+            var eout = document.getElementById("walletout");
+            var comout = eout.options[eout.selectedIndex].value;
+            var fr_transfer_amt=$("#fr_transfer_amt").val();
+            var tmp_fr_gamefrom=comin;
+            var tmp_fr_gameto=comout;
+
+            if( comin=='0') {
+                tmp_fr_gamefrom='main';
+            }
+            if( comout=='0') {
+                tmp_fr_gameto='main';
+            }
+
+            maintenance(tmp_fr_gamefrom);
+            maintenance_status_from = tmp_maintenance_status;
+            maintenance(tmp_fr_gameto);
+            maintenance_status_to   = tmp_maintenance_status;
+
+            if (maintenance_status_from == 'fail' || maintenance_status_to == 'fail') {
+                var tmp_m_str = '';
+                if (maintenance_status_from == 'fail') {
+                    tmp_m_str = tmp_fr_gamefrom;
+                }else{
+                    tmp_m_str = tmp_fr_gameto;
+                }
+
+                alert_box(tmp_m_str + '平台維護中','true','false');
+
+            } else if ( tmp_fr_gamefrom == tmp_fr_gameto) {
+                alert_box('请选择不同的平台转帐','true','false');
+
+            }else{
+
+                $.ajax({
+                    url: '../ty/u_transfer-action',
+                    type: 'POST',
+                    dataType: 'json',
+                    async : false,
+                    data: {
+                        fr_transfer_type : 'transfer',
+                        fr_gamefrom : comin,
+                        fr_gameto : comout,
+                        fr_transfer_amt : fr_transfer_amt}
+                })
+                    .done(function(d) {
+                        if(d.error==false) {
+                            var tmp_switch = maintenance_switch;
+                            if (maintenance_switch == 'auto' &&  maintenance_from == 'down_tran') {
+                                maintenance_switch = 'hand';
+                            }
+                            getccl(tmp_fr_gameto);
+                            getccl(tmp_fr_gamefrom);
+                            if (tmp_switch == 'auto' && maintenance_from == 'down_tran') {
+                                maintenance_switch = 'auto';
+                            }
+                            alert_box("转帐成功",'true','false');
+                        } else {
+                            alert_box(d.msg,'true','false');
+                        }
+
+
+                    })
+            }
+
+            name_arr=[];
+            name_arr['0']='【中心钱包】';
+            name_arr['bbin']='【BB波音平台】';
+            name_arr['ag_ag']='【AG环亚平台】';
+            name_arr['mg']='【MG摩卡平台】';
+            name_arr['avia']='【OG東方平台】';
+            name_arr['pteurope']='【PT电子】';
+            name_arr['hb']='【HB电子】';
+            name_arr['nt']='【NT电子】';
+            name_arr['allbet']='【AllBet欧博平台】';
+            name_arr['inteplay']='【INTEPLAY电子】';
+            name_arr['gg']='【GG捕鱼】';
+            name_arr['qt']='【QT电子】';
+            name_arr['ibc']='【IBC沙巴】';
+            name_arr['ttg']='【TTG电子】';
+            maintenance_from = '';
+            tmp_maintenance_status = '';
+            $(".go_tsfBtn").attr('disabled', false);
+        });
+    });
+
+    var maintenance_switch = 'hand';
+    var maintenance_from = '';
+
+    function getccl(com){
+        if (maintenance_switch == 'hand') {
+            maintenance(com);
+        }
+        var tmp_status = $('#'+com+'_ccl').attr('data-status');
+        if (tmp_status == 'working' || maintenance_switch == 'hand' ) {
+            $.ajax({
+                url: '../ty/u_transfer-ajax?com='+com,
+                type: 'POST',
+                dataType: 'json',
+                data : {com :com}
+            })
+                .done(function(d) {
+                    if (com == 'main') {
+                        $("#"+com+"_ccl").text(d.total);
+                    }else{
+                        if (tmp_status != 'working') {
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("维护中");
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').css("color","#ff932b");
+                        }else if(parseInt(d.total)>=0){
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text(d.total);
+                        }else{
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("系统异常");
+                        }
+                        $("#"+com+"_ccl").parent().find('i').removeClass('fa-spin');
+                    }
+                })
+                .fail(function() {
+                    console.log("fail");
+                })
+        }else{
+            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("维护中");
+            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').css("color","#ff932b");
+            $("#"+com+"_ccl").parent().find('i').removeClass('fa-spin');
+        }
+    }
+
+    var  tmp_maintenance_status = '';//用来存下方转帐判断有无维护用
+
+    function maintenance(com){
+        $.ajax({
+            url: 'api/function/maintenance.php',
+            type: 'POST',
+            dataType: 'json',
+            async:false,
+            data: {com: com}
+        })
+            .done(function(d) {
+                if ( com  == 'all') {//我的 => 转帐
+                    $.each(d.data, function(index, val) {
+                        $.each(val, function(s_index, s_val) {
+                            $('#'+s_index+'_ccl').attr('data-status', s_val);
+                        });
+                    });
+                }else{//用来存下方转帐判断有无维护用
+                    if (d.success == true) {
+                        tmp_maintenance_status = 'success';
+                    }else{
+                        tmp_maintenance_status = 'fail';
+                    }
+                }
+
+            })
+    }
+
+    function window_open(url){
+        wdth = $(window).width();
+        height = $(window).height();
+        window.open(url,'blank','width='+wdth,'height='+height);
+
+    }
+
+</script>
+
+<script type="text/javascript" src="js/index.js"></script>
+
+
+<!-- app open -->
+<script src="https://static.ydbimg.com/API/YdbOnline.js"></script>
+<script>
+    function openbrowser(url){
+        var YDB = new YDBOBJ();
+        YDB.OpenWithSafari(url);
+        console.log(url);
+    }
+    $(document).on('click', '.app_open', function(event) {
+        var tmp_url = $(this).attr('data-href');
+        $.get(tmp_url, function(data) {
+            // console.log(data);
+            openbrowser(data);
+        });
+        event.preventDefault();
+    });
+    $(document).on('click', '.app_open_bb', function(event) {
+        var tmp_url = $(this).attr('data-href');
+        $.get(tmp_url, function(data) {
+            tmp = data.replace(/\"/g,"'");
+            tmp = btoa(tmp);
+            tmp = tmp.replace(/\+/g,"_");
+            // console.log(tmp);
+            var data_url = location.protocol+"//vip77765.com/tymobile_new/redirect.php?u="+tmp;
+            openbrowser(data_url);
+        });
+        event.preventDefault();
+    });
+    //cnzz
+    var cz = document.createElement("script");
+    cz.src = "//s11.cnzz.com/z_stat.php?id=1261102673&web_id=1261102673";
+    document.getElementsByTagName('body')[0].appendChild(cz);
+
+    function reset_wallet(){
+        $("#walletin,#walletout").html("");
+        $.each(plate_arr, function(index, val) {
+            if (index==0) {
+                $("#walletin").append(val);
+            }else{
+                $("#walletout,#walletin").append(val);
+            }
+        });
+    }
+
+</script>
+<!-- app open -->
+
+
+
+</body></html>

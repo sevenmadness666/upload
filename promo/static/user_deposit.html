@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <title>添运国际手机版</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+    <meta name="HandheldFriendly" content="true">
+
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="shortcut icon" href="images/favicon.png">
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css?v3">
+    <link type="text/css" rel="stylesheet" href="css/page.css?v9">
+    <link type="text/css" rel="stylesheet" href="css/user.css?v4">
+    <link type="text/css" rel="stylesheet" href="css/main.css?v1">
+
+    <script src="js/jquery-1.8.3.min.js"></script><!-- 1.8.3 -->
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.lazyload.min.js"></script><!-- 延时载入 -->
+    <script src="js/tabs.js"></script><!-- tabs -->
+    <!--   <script src="js/socket.io.js?v1"></script> -->
+    <script type="text/javascript">
+        // function alert_box(message, showbutton = 'true', confirm = 'false'){//show确定、取消按钮
+        function alert_box(message, showbutton, confirm ){//show确定、取消按钮
+            if (showbutton == 'false') {
+                $('#pop_button_check').css('display','none');
+                $('#pop_button_cancel_x').css('display','none');
+            }else{
+                $("#pop_button_check").css('display','');
+                $('#pop_button_cancel_x').css('display','');
+            }
+            if (showbutton == 'true' && confirm == 'true') {
+                $("#pop_button_cancel").css('display','');
+            }else{
+                $("#pop_button_cancel").css('display','none');
+            }
+            $(".pop_bg , .Pop-up").fadeIn('350');
+            setTimeout(function(){ $('#pop_text').html(message); }, 300);
+        }
+        $(function(){
+            var page_name = location.pathname;
+            if(page_name == "/tymobile_new/user.php"){
+                $(".back").hide();
+            }
+        });
+
+        //socket detect
+        var device = "phone";
+
+    </script></head>
+
+
+
+<body>
+
+<header class="top_login">
+    <div class="back" onclick="history.back();"><i class="fa fa-chevron-left"></i>返回</div>
+    <div class="logo" onclick="javascript:void(0);location.href='user.php'"></div>
+    <div class="top_right">
+        <i class="fa fa-database"></i>
+        <p id="main_ccl">0.00</p>
+    </div>
+</header>
+
+
+
+
+<a href="javascript:" id="go_top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a><!-- 返回顶端 -->
+
+<main class="main user">
+    <div class="tab" id="tab_mob">
+        <div id="displayShow" class="tab-nav_counter j-tab-nav_mob tab_btn3">
+            <a href="#" class="display_4_title" style="display: block;">银行充值<div class="dspico" style="background: url(images/user/dspico_2p.gif)no-repeat;"></div></a>
+            <a href="#" class="display_10_title" style="display:none">微信支付宝转帐<div class="dspico" style="background: url(images/user/dspico_2p.gif)no-repeat;"></div></a>
+            <a href="#" class="current" style="display: block;">在线支付<div class="dspico" style="background: url(images/user/dspico_1p.gif)no-repeat;"></div></a>
+            <a href="#" class="display_1_title" style="display:none">微信支付</a>
+            <a href="#" class="display_2_title" style="display:none">快捷支付(推荐)</a>            <a href="#" class="display_3_title" style="display:none">支付宝支付</a>
+            <a href="#" class="display_6_title" style="display:none">qq钱包</a>
+            <a href="#" class="display_9_title" style="display:none">京东支付</a>
+            <a href="#" class="display_7_title" style="display: block;">银联支付</a>
+        </div>
+        <div class="tab-con_counter">
+            <div class="j-tab-con_mob">
+
+                <!-- 银行充值 -->
+                <div class="tab-con-item display_4" style="">
+                    <ul>
+                        <form name="form" action="" method="post" id="action_forms1">
+                            <li style="display:block">
+                                <h3>选择优惠</h3>
+                                <item>
+                                    <select name="fr_promo" id="fr_romo_select" style="margin:0px"><option value="0">放弃申请优惠</option><option value="534" min_deposit="100.0000">银行入款2%红利</option></select>                                </item>
+                            </li>
+                            <li>
+                                <h3>选择支付银行</h3>
+                                <item>
+                                    <select name="fr_deposit_bank" id="f1" onchange="change_bank(this)" style="margin:0px"><option>请您选择支付银行</option><option value="4" bankname="中国建设银行" accountno="error" accountname="" acc="21448" cname="PCBC" selected="">中国建设银行</option></select>
+                                </item>
+                                <div id="bankshow" style="margin-left:24%;font-size:15px;"><div>
+                                </div></div></li>
+                            <li>
+                                <h3>选择充值方式</h3>
+                                <item>
+                                    <select name="fr_deposit_method" style="margin:0px">
+                                        <option value="1">转帐充值</option>
+                                        <option value="2">ATM充值</option>
+                                    </select>
+                                </item>
+                            </li>
+                            <li>
+                                <h3>打款人姓名：</h3>
+                                <input class="enter" placeholder="请填写您的打款人姓名" name="fr_accountName" id="id_accountName" maxlength="8">
+                            </li>
+                            <li>
+                                <h3>金额：</h3>
+                                <!-- <input type="hidden" name="fr_gdcode" value=""> -->
+                                <input type="hidden" name="fr_timestamp" value="1531115928">
+                                <input type="hidden" name="fr_bankacc" id="bankacc_1" value="">
+                                <input type="hidden" name="fr_serialno" id="fr_serialno_1">
+                                <input type="hidden" name="max_1" id="max_1" value="50000.00">
+                                <input type="hidden" name="min_1" id="min_1" value="50.00">
+                                <!-- <input type="hidden" name="fr_promo" id="fr_promo" value="0"/> -->
+                                <input class="enter" name="fr_amount" id="id_amount1" maxlength="10">
+                            </li>
+                            <li class="enter" id="promo_code" style="display:none;">
+                                <h3>验证码</h3>
+                                <input class="reg_input" name="fr_gdcode" id="fr_gdcode_bank" placeholder="验证码" style="width: 100px">
+                                <img style=" position: absolute; height: 33px; margin-left: 9px;" src="../captcha/draw_gd.php" onclick="change_gdcode(this)">
+                            </li>
+                        </form>
+                        <button type="button" href="#" id="md-trigger" data-modal="modal-13" class="save_button1" onclick="validation('1')">确定</button>
+                        <div class="teaching dp4AlTh_main">
+                            <img src="images/newbie/AlypTh_01.jpg" width="100%">
+                        </div>
+                        <li>
+                            <h3>注意事项：</h3>
+                            <ol>
+                                <div class="loding loading1" style="display:none;"><i class="fa fa-spinner fa-spin"></i>系统处理中，请稍后!</div>
+                                <li>单笔最高限额：<b>￥50,000</b></li>
+                                <li>【重要提醒】勿保留银行帐户，请您在每次充值前重新获取最新的收款帐户，若存款至停用的收款帐户，公司无法查收恕不负责！</li>
+                                <li>超出在线支付单日额度限制或单笔大额充值，可使用其它充值方式</li>
+                                <li>如遇到存款扫码失败等故障， 请尝试刷新重试，并联系客服使用其他替换通道</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 微信支付宝转帐 -->
+                <div class="tab-con-item display_10" style="display:none;">
+                    <ul>
+                        <form name="form" action="" method="post" id="action_forms10">
+                            <li style="display:block">
+                                <h3>选择优惠</h3>
+                                <item>
+                                    <select name="fr_promo" id="fr_romo_select" style="margin:0px"><option value="0">放弃申请优惠</option><option value="534" min_deposit="100.0000">银行入款2%红利</option></select>                                </item>
+                            </li>
+                            <li>
+                                <h3>选择支付银行</h3>
+                                <item>
+                                    <select name="fr_deposit_bank" id="f10" onchange="change_bank(this)" style="margin:0px"><option>请您选择支付银行</option></select>
+                                </item>
+                            </li>
+                            <li>
+                                <h3>打款人姓名：</h3>
+                                <input class="enter" placeholder="请填写您的打款人姓名" name="fr_accountName" id="id_accountName1" maxlength="8">
+                            </li>
+                            <li>
+                                <h3>金额：</h3>
+                                <!-- <input type="hidden" name="fr_gdcode" value=""> -->
+                                <input type="hidden" name="fr_timestamp" value="1531115928">
+                                <input type="hidden" name="fr_bankacc" id="bankacc_10" value="">
+                                <input type="hidden" name="fr_serialno" id="fr_serialno_10">
+                                <input type="hidden" name="max_1" id="max_10" value="50000.00">
+                                <input type="hidden" name="min_1" id="min_10" value="50.00">
+                                <input type="hidden" name="fr_deposit_method" value="1">
+                                <!-- <input type="hidden" name="fr_promo" id="fr_promo" value="0"/> -->
+                                <input class="enter" name="fr_amount" id="id_amount10" maxlength="10">
+                            </li>
+                            <li class="enter" id="promo_code1" style="display:none;">
+                                <h3>验证码</h3>
+                                <input class="reg_input" name="fr_gdcode" id="fr_gdcode_bank1" placeholder="验证码" style="width: 100px">
+                                <img style=" position: absolute; height: 33px; margin-left: 9px;" src="../captcha/draw_gd.php" onclick="change_gdcode(this)">
+                            </li>
+                        </form>
+                        <button type="button" href="#" id="md-trigger" data-modal="modal-13" class="save_button1" onclick="validation('10')" style="margin:3% 0 -6px 3%;">确定</button>
+
+                        <button type="button" class="btn2 dp4WcTh_btn" style="margin:3% 0 -6px 3%;">微信转帐银行卡教学<i class="fa fa-sort-desc"></i></button>
+                        <div class="teaching dp4WcTh_main">
+                            <p>于首页点击充值</p>
+                            <img src="images/newbie/deposit_01.gif?v2" width="100%">
+                            <img src="images/newbie/WchTh_02.jpg" width="100%">
+                        </div>
+                        <button type="button" class="btn2 dp4AlTh_btn">支付宝转账银行卡教学<i class="fa fa-sort-desc"></i></button>
+                        <div class="teaching dp4AlTh_main">
+                            <img src="images/newbie/AlypTh_01.jpg" width="100%">
+                        </div>
+                        <li>
+                            <h3>注意事项：</h3>
+                            <ol>
+                                <div class="loding loading1" style="display:none;"><i class="fa fa-spinner fa-spin"></i>系统处理中，请稍后!</div>
+                                <li>单笔最高限额：<b>￥50,000</b></li>
+                                <li>超出在线支付单日额度限制或单笔大额充值，可使用其它充值方式</li>
+                                <li>支付银行与帐户姓名等资料，请联系<a class="cs_str" href="https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&amp;configID=49259&amp;jid=2028701177&amp;s=1&amp;lan=zh" target="_blank">在线客服</a></li>
+                                <li>如遇到存款扫码失败等故障， 请尝试刷新重试，并联系客服使用其他替换通道</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 在线支付 -->
+                <div class="tab-con-item display_5" style="display: block;">
+                    <ul>
+                        <form name="form" action="" method="post" id="action_forms5">
+                            <li>
+                                <h3>支付银行</h3>
+                                <item>
+                                    <select name="fr_deposit_bank" id="f5" onchange="change_bank(this)" style="margin:0px"><option cname="default_option" value="-1">请您选择支付银行</option><option value="1" acc="1" cname="ABOC">中国农业银行</option><option value="2" acc="2" cname="ICBK">中国工商银行</option><option value="3" acc="3" cname="COMM">交通银行</option><option value="4" acc="4" cname="PCBC">中国建设银行</option><option value="6" acc="6" cname="BKCH">中国银行</option><option value="7" acc="7" cname="CMBC" selected="">招商银行</option><option value="8" acc="8" cname="GDBK">广东发展银行</option><option value="9" acc="9" cname="PSBC">中国邮政储蓄银行</option><option value="16" acc="16" cname="MSBC">中国民生银行</option></select>
+                                </item>
+                            </li>
+                            <li>
+                                <h3>金额：</h3>
+                                <input type="hidden" name="fr_gdcode" value="">
+                                <input type="hidden" name="fr_deposit_method" value="3">
+                                <input type="hidden" name="fr_timestamp" value="1531115928">
+                                <input type="hidden" name="fr_bankacc" id="bankacc_5" value="">
+                                <input type="hidden" name="fr_serialno" id="fr_serialno_5">
+                                <input type="hidden" name="max_5" id="max_5" value="20000.00">
+                                <input type="hidden" name="min_5" id="min_5" value="50.00">
+                                <input type="hidden" name="fr_promo" id="fr_promo" value="0">
+                                <input class="enter" name="fr_amount" id="id_amount5" maxlength="10">
+                            </li>
+                        </form>
+                        <button type="button" href="#" id="md-trigger" data-modal="modal-13" class="save_button5" onclick="validation('5')">确定</button>
+                        <li>
+                            <h3>注意事项：</h3>
+                            <ol>
+                                <div class="loding loading5" style="display:none;"><i class="fa fa-spinner fa-spin"></i>系统处理中，请稍后!</div>
+                                <li>单笔最高限额：<b>￥20,000</b></li>
+                                <li>超出在线支付单日额度限制或单笔大额充值，可使用其它充值方式</li>
+                                <li>支付银行与帐户姓名等资料，请联系<a class="cs_str" href="https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&amp;configID=49259&amp;jid=2028701177&amp;s=1&amp;lan=zh" target="_blank">在线客服</a></li>
+                                <li>请会员至中国银联开通快捷功能，让您的支付更加便利<a href="https://ty777.com/ty_newbie/index.php?page=5" target="_blank">点我</a></li>
+                                <li>如遇到存款扫码失败等故障， 请尝试刷新重试，并联系客服使用其他替换通道</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 微信支付 -->
+                <div class="tab-con-item display_1" style="display:none;">
+                    <ul>
+                        <form name="form" action="" method="post" id="action_forms2">
+                            <li>
+                                <h3>支付银行</h3>
+                                <select name="fr_deposit_bank" id="f2" onchange="change_bank(this)" style="margin:0px"><option cname="default_option" value="-1">请您选择支付银行</option></select>
+                            </li>
+                            <li>
+                                <h3>存款金额：</h3>
+                                <input type="hidden" name="fr_gdcode" value="">
+                                <input type="hidden" name="fr_deposit_method" value="3">
+                                <input type="hidden" name="fr_timestamp" value="1531115928">
+                                <input type="hidden" name="fr_bankacc" id="bankacc_2" value="">
+                                <input type="hidden" name="fr_serialno" id="fr_serialno_2">
+                                <input type="hidden" name="max_2" id="max_2" value="5000.00">
+                                <input type="hidden" name="min_2" id="min_2" value="50.00">
+                                <input type="hidden" name="fr_promo" id="fr_promo2" value="0">
+                                <input class="enter" name="fr_amount" id="id_amount2" maxlength="5">
+                            </li>
+                            <!-- <div id="wecode"></div> jasper0212-->
+                            <!--                             <li>
+                                                            <h3>实际金额：</h3>
+                                                            <input class="enter" name="fr_amount" id="id_amount22" maxlength="5" readonly="readonly">
+                                                        </li> -->
+                        </form>
+                        <div class="loding loading2" style="display:none;"><i class="fa fa-spinner fa-spin"></i>系统处理中，请稍后!</div>
+                        <button type="button" href="#" id="md-trigger" data-modal="modal-13" class="save_button2" onclick="validation('2')" style="margin:3% 0 -6px 3%;">确定</button>
+                        <button type="button" class="btn2">扫码教学<i class="fa fa-sort-desc"></i></button>
+                        <div class="teaching WchpayTh">
+                            <p>1、先用一个手机拍下付款二维码。</p>
+                            <p>2、然后用另一个手机微信扫码付款。</p>
+                            <img src="images/user/wch_teaching.gif">
+                        </div>
+                        <li>
+                            <h3>注意事项：</h3>
+                            <ol>
+                                <li>单笔最高限额：<b>￥5,000</b></li>
+                                <!--                                 <li style="color:red">因支付政策调整，为了您的款项安全，系统将根据您提交的存款金额自动生成安全支付金额，请以实际支付金额为准。</br>
+                                                                    例：您输入金额100元，实际支付金额100.11元，到帐金额100.11元。<b></li> -->
+                                <li>超出在线支付单日额度限制或单笔大额充值，可使用其它充值方式</li>
+                                <li>支付银行与帐户姓名等资料，请联系<a class="cs_str" href="https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&amp;configID=49259&amp;jid=2028701177&amp;s=1&amp;lan=zh" target="_blank">在线客服</a></li>
+                                <li>如遇到存款扫码失败等故障， 请尝试刷新重试，并联系客服使用其他替换通道</li>
+                                <li>发卡行限额解决方法：需要用户自己致电发卡行客服要求增加网上交易额度</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 快捷支付(推荐) -->
+                <div class="tab-con-item display_2" style="display:none;">
+                    <ul>
+                        <form name="form" action="" method="post" id="action_forms3">
+                            <li>
+                                <h3>支付银行</h3>
+                                <select name="fr_deposit_bank" id="f3" onchange="change_bank(this)" style="margin:0px"><option cname="default_option" value="-1">请您选择支付银行</option></select>
+                            </li>
+                            <li>
+                                <h3>金额：</h3>
+                                <input type="hidden" name="fr_gdcode" value="">
+                                <input type="hidden" name="fr_deposit_method" value="3">
+                                <input type="hidden" name="fr_timestamp" value="1531115928">
+                                <input type="hidden" name="fr_bankacc" id="bankacc_3" value="">
+                                <input type="hidden" name="fr_serialno" id="fr_serialno_3">
+                                <input type="hidden" name="max_3" id="max_3" value="3000.00">
+                                <input type="hidden" name="min_3" id="min_3" value="50.00">
+                                <input type="hidden" name="fr_promo" id="fr_promo3" value="0">
+                                <input class="enter" placeholder="金额" name="fr_amount" id="id_amount3" maxlength="10">
+                            </li>
+                        </form>
+                        <div class="loding loading3" style="display:none;"><i class="fa fa-spinner fa-spin"></i>系统处理中，请稍后!</div>
+                        <button type="button" href="#" id="md-trigger" data-modal="modal-13" class="save_button3" onclick="validation('3')">确定</button>
+
+                        <button type="button" class="btn2 dp2KuaiJie_jjk_btn" style="margin:3% 0 -6px 3%;">借记卡教学<i class="fa fa-sort-desc"></i></button>
+                        <div class="teaching KuaiJie_jjkTh_main">
+                            <p>信用卡教学</p>
+                            <img src="images/newbie/KuaiJie_jjk_01.png" width="100%">
+                            <img src="images/newbie/KuaiJie_jjk_02.png" width="100%">
+                            <img src="images/newbie/KuaiJie_jjk_03.png" width="100%">
+                            <img src="images/newbie/KuaiJie_jjk_04.png" width="100%">
+                            <img src="images/newbie/KuaiJie_jjk_05.png" width="100%">
+                            <button class="cls_KuaiJie_jjkTh">收起教学</button>
+                        </div>
+
+                        <button type="button" class="btn2 dp2KuaiJie_suk_btn">信用卡教学<i class="fa fa-sort-desc"></i></button>
+                        <div class="teaching KuaiJie_sukTh_main">
+                            <img src="images/newbie/KuaiJie_suk_01.png" width="100%">
+                            <img src="images/newbie/KuaiJie_suk_02.png" width="100%">
+                            <img src="images/newbie/KuaiJie_suk_03.png" width="100%">
+                            <img src="images/newbie/KuaiJie_suk_04.png" width="100%">
+                            <img src="images/newbie/KuaiJie_suk_05.png" width="100%">
+                            <button class="cls_KuaiJie_sukTh">收起教学</button>
+                        </div>
+
+                        <li>
+                            <h3>注意事项：</h3>
+                            <ol>
+                                <li>单笔最高限额：<b>￥3,000</b></li>
+                                <li>超出在线支付单日额度限制或单笔大额充值，可使用其它充值方式</li>
+                                <li>支付银行与帐户姓名等资料，请联系<a class="cs_str" href="https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&amp;configID=49259&amp;jid=2028701177&amp;s=1&amp;lan=zh" target="_blank">在线客服</a></li>
+                                <li>请会员<a href="https://ty777.com/ty_newbie/index.php?page=5" target="_blank">点我</a>至中国银联开通快捷功能，让您的支付更加便利</li>
+                                <li>如遇到存款扫码失败等故障， 请尝试刷新重试，并联系客服使用其他替换通道</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 支付宝 -->
+                <div class="tab-con-item display_3" style="display:none;">
+                    <ul>
+                        <form name="form" action="" method="post" id="action_forms4">
+                            <li>
+                                <h3>支付银行</h3>
+                                <item>
+                                    <select name="fr_deposit_bank" id="f4" onchange="change_bank(this)" style="margin:0px"><option cname="default_option" value="-1">请您选择支付银行</option></select>
+                                </item>
+                            </li>
+                            <li>
+                                <h3>存款金额：</h3>
+                                <input type="hidden" name="fr_gdcode" value="">
+                                <input type="hidden" name="fr_deposit_method" value="3">
+                                <input type="hidden" name="fr_timestamp" value="1531115928">
+                                <input type="hidden" name="fr_bankacc" id="bankacc_4" value="">
+                                <input type="hidden" name="fr_serialno" id="fr_serialno_4">
+                                <input type="hidden" name="max_4" id="max_4" value="5000.00">
+                                <input type="hidden" name="min_4" id="min_4" value="50.00">
+                                <input type="hidden" name="fr_promo" id="fr_promo" value="0">
+                                <!-- <input class="enter" name="fr_amount" id="id_amount4"  maxlength="10"> -->
+                                <select class="enter" name="fr_amount" id="id_amount4">
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="150">150</option>
+                                    <option value="200">200</option>
+                                    <option value="300">300</option>
+                                    <option value="500">500</option>
+                                    <option value="800">800</option>
+                                    <option value="1000">1000</option>
+                                    <option value="1500">1500</option>
+                                    <option value="2000">2000</option>
+                                    <option value="3000">3000</option>
+                                    <option value="4000">4000</option>
+                                    <option value="5000">5000</option>
+                                </select>
+                            </li>
+                            <!--                             <li>
+                                                            <h3>实际金额：</h3>
+                                                            <input class="enter" name="fr_amount" id="id_amount44"  maxlength="5" readonly="readonly">
+                                                        </li> -->
+                        </form>
+                        <button type="button" href="#" id="md-trigger" data-modal="modal-13" class="save_button4" onclick="validation('4')">确定</button>
+                        <li>
+                            <h3>注意事项：</h3>
+                            <ol>
+                                <div class="loding loading4" style="display:none;"><i class="fa fa-spinner fa-spin"></i>系统处理中，请稍后!</div>
+                                <li>单笔最高限额：<b>￥4,980</b></li>
+                                <li style="color:red">限用借记卡 与 支付宝余额支付！</li>
+                                <!--                                 <li style="color:red">因支付政策调整，为了您的款项安全，系统将根据您提交的存款金额自动生成安全支付金额，请以实际支付金额为准。</br>
+                                                                    例：您输入金额100元，实际支付金额100.11元，到帐金额100.11元。<b></li> -->
+                                <li>超出在线支付单日额度限制或单笔大额充值，可使用其它充值方式</li>
+                                <li>支付银行与帐户姓名等资料，请联系<a class="cs_str" href="https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&amp;configID=49259&amp;jid=2028701177&amp;s=1&amp;lan=zh" target="_blank">在线客服</a></li>
+                                <li>如遇到存款扫码失败等故障， 请尝试刷新重试，并联系客服使用其他替换通道</li>
+                                <li>支付宝转银行卡教学请<a href="#;" class="falp_btn">【点此查看】</a>。</li>
+                            </ol>
+                            <div class="for_aliplay" style="display:none;margin: 20px 0 0 0;">
+                                <p>首先打开手机支付宝并登录，在主板面点击【转账】功能。</p>
+                                <img src="images/newbie/gfbehk_mo01.png" width="100%">
+                                <p>在转账页面下方选择【转到银行卡】按钮</p>
+                                <img src="images/newbie/gfbehk_mo02.png" width="100%">
+                                <p>同样需填写【收款人卡号】==【所属银行】==【收款人姓名】==【付款金额】</p>
+                                <img src="images/newbie/gfbehk_mo03.png" width="100%">
+                                <p>提交后再输入支付宝【支付密码】即可。</p>
+                                <img src="images/newbie/gfbehk_mo04.png" width="100%">
+                                <p>转账成功后，可在支付宝账单详情中查看，改转账明细、和到帐时间。</p>
+                                <img src="images/newbie/gfbehk_mo05.png" width="100%">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- QQ钱包 -->
+                <div class="tab-con-item display_6" style="display:none;">
+                    <ul>
+                        <form name="form" action="" method="post" id="action_forms6">
+                            <li>
+                                <h3>支付银行</h3>
+                                <item>
+                                    <select name="fr_deposit_bank" id="f6" onchange="change_bank(this)" style="margin:0px"><option cname="default_option" value="-1">请您选择支付银行</option></select>
+                                </item>
+                            </li>
+                            <li>
+                                <h3>存款金额：</h3>
+                                <input type="hidden" name="fr_gdcode" value="">
+                                <input type="hidden" name="fr_deposit_method" value="3">
+                                <input type="hidden" name="fr_timestamp" value="1531115928">
+                                <input type="hidden" name="fr_bankacc" id="bankacc_6" value="">
+                                <input type="hidden" name="fr_serialno" id="fr_serialno_6">
+                                <input type="hidden" name="max_6" id="max_6" value="5000.00">
+                                <input type="hidden" name="min_6" id="min_6" value="50.00">
+                                <input type="hidden" name="fr_promo" id="fr_promo" value="0">
+                                <input class="enter" name="fr_amount" id="id_amount6" maxlength="10">
+                            </li>
+                            <!--                             <li>
+                                                            <h3>实际金额：</h3>
+                                                                <input class="enter" name="fr_amount" id="id_amount66"  maxlength="5" readonly="readonly">
+                                                        </li> -->
+                        </form>
+                        <button type="button" href="#" id="md-trigger" data-modal="modal-13" class="save_button5" onclick="validation('6')">确定</button>
+                        <li>
+                            <h3>注意事项：</h3>
+                            <ol>
+                                <div class="loding loading5" style="display:none;"><i class="fa fa-spinner fa-spin"></i>系统处理中，请稍后!</div>
+                                <!--                                 <li style="color:red">因支付政策调整，为了您的款项安全，系统将根据您提交的存款金额自动生成安全支付金额，请以实际支付金额为准。</br>
+                                                                    例：您输入金额100元，实际支付金额100.11元，到帐金额100.11元。<b></li> -->
+                                <li>单笔最高限额：<b>￥5,000</b></li>
+                                <li>如遇到存款扫码失败等故障， 请尝试刷新重试，并联系客服使用其他替换通道</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 京东支付 -->
+                <div class="tab-con-item display_9" style="display:none;">
+                    <ul>
+                        <form name="form" action="" method="post" id="action_forms9">
+                            <li>
+                                <h3>支付银行</h3>
+                                <item>
+                                    <select name="fr_deposit_bank" id="f9" onchange="change_bank(this)" style="margin:0px"><option cname="default_option" value="-1">请您选择支付银行</option></select>
+                                </item>
+                            </li>
+                            <li>
+                                <h3>存款金额：</h3>
+                                <input type="hidden" name="fr_gdcode" value="">
+                                <input type="hidden" name="fr_deposit_method" value="3">
+                                <input type="hidden" name="fr_timestamp" value="1531115928">
+                                <input type="hidden" name="fr_bankacc" id="bankacc_9" value="">
+                                <input type="hidden" name="fr_serialno" id="fr_serialno_9">
+                                <input type="hidden" name="max_9" id="max_9" value="5000.00">
+                                <input type="hidden" name="min_9" id="min_9" value="50.00">
+                                <input type="hidden" name="fr_promo" id="fr_promo" value="0">
+                                <input class="enter" name="fr_amount" id="id_amount9" maxlength="10">
+                            </li>
+                            <!--                             <li>
+                                                            <h3>实际金额：</h3>
+                                                                <input class="enter" name="fr_amount" id="id_amount66"  maxlength="5" readonly="readonly">
+                                                        </li> -->
+                        </form>
+                        <button type="button" href="#" id="md-trigger" data-modal="modal-13" class="save_button5" onclick="validation('9')">确定</button>
+                        <li>
+                            <h3>注意事项：</h3>
+                            <ol>
+                                <div class="loding loading5" style="display:none;"><i class="fa fa-spinner fa-spin"></i>系统处理中，请稍后!</div>
+                                <!--                                 <li style="color:red">因支付政策调整，为了您的款项安全，系统将根据您提交的存款金额自动生成安全支付金额，请以实际支付金额为准。</br>
+                                                                    例：您输入金额100元，实际支付金额100.11元，到帐金额100.11元。<b></li> -->
+                                <li>单笔最高限额：<b>￥5,000</b></li>
+                                <li>如遇到存款扫码失败等故障， 请尝试刷新重试，并联系客服使用其他替换通道</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 银联支付 -->
+                <div class="tab-con-item display_7" style="">
+                    <ul>
+                        <form name="form" action="" method="post" id="action_forms7">
+                            <li>
+                                <h3>支付银行</h3>
+                                <item>
+                                    <select name="fr_deposit_bank" id="f7" onchange="change_bank(this)" style="margin:0px"><option cname="default_option" value="-1">请您选择支付银行</option><option value="41" acc="41" cname="unionpay" selected="">银联扫码</option></select>
+                                </item>
+                            </li>
+                            <li>
+                                <h3>金额：</h3>
+                                <input type="hidden" name="fr_gdcode" value="">
+                                <input type="hidden" name="fr_deposit_method" value="3">
+                                <input type="hidden" name="fr_timestamp" value="1531115928">
+                                <input type="hidden" name="fr_bankacc" id="bankacc_7" value="">
+                                <input type="hidden" name="fr_serialno" id="fr_serialno_7">
+                                <input type="hidden" name="max_7" id="max_7" value="5000.00">
+                                <input type="hidden" name="min_7" id="min_7" value="50.00">
+                                <input type="hidden" name="fr_promo" id="fr_promo" value="0">
+                                <input class="enter" name="fr_amount" id="id_amount7" maxlength="5">
+                            </li>
+                        </form>
+                        <button type="button" href="#" id="md-trigger" data-modal="modal-13" class="save_button5" onclick="validation('7')" style="margin:3% 0 -6px 3%;">确定</button>
+                        <button type="button" class="btn2">点我看教学<i class="fa fa-sort-desc"></i></button>
+                        <div class="teaching thElpay">
+                            <p>1、银联钱包APP下载</p>
+                            <img src="images/newbie/elpayth_01.png">
+                            <p>2、注册并登入。</p>
+                            <img src="images/newbie/elpayth_02.png">
+                            <p>3、绑定银行卡，选择卡管家 → 卡列表 → 添加银行卡 → 添加一张新卡。</p>
+                            <p>信用卡和储蓄卡皆可添加</p>
+                            <img src="images/newbie/elpayth_03.png">
+                            <p>4、开通银联支付。<br>有些用户虽然已绑卡，但是并未开通银联支付，所以会导致银联二维码支付不成功</p>
+                            <img src="images/newbie/elpayth_04.png">
+                            <button class="cls_ElpayTh">收起教学</button>
+                        </div>
+                        <li>
+                            <h3>注意事项：</h3>
+                            <ol>
+                                <div class="loding loading7" style="display:none;"><i class="fa fa-spinner fa-spin"></i>系统处理中，请稍后!</div>
+                                <li>单笔最高限额：<b>￥5000</b></li>
+                                <li>如遇到存款扫码失败等故障， 请尝试刷新重试，并联系客服使用其他替换通道</li>
+                                <li>想要使用银联扫码支付，前提是需要持有卡号为62开头银联卡，信用卡借记卡都可以。
+                                    <p>a、手机下载中国银行APP或银联钱包APP；</p>
+                                    <p>b、登录中国银行手机APP，通过右上角“+”中的付款功能或移动支付模块中的付款功能；</p>
+                                    <p>c、进入向商家付款的二维码页面，对准机具扫码即可。</p>
+                                </li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+    // tab
+    $("#tab_mob").find('.j-tab-nav_mob').find("a").click(function(){
+        index = $(this).index();   //哪个被选取
+        $(this).attr("class","current").siblings().attr("class","");  //自己加current 其他拿掉class
+        $(".tab-con-item").hide().eq(index).show()
+        $("#fr_romo_select").find('option:selected').removeAttr("selected");//移除銀行充值優惠的選取的，因為change會判斷if問題所以要加這串。
+        $('#fr_romo_select').change();//移除銀行充值優惠的選取的，因為change會判斷if問題所以要加這串。
+    });
+    // tab
+
+    //银行充值-微信转帐
+    $(".display_10 .btn2.dp4WcTh_btn").click(function() {
+        $(".teaching.dp4WcTh_main").toggle("fade", 350);
+        $('.display_1 .btn2 i').toggleClass('Rotate');
+    });
+    //银行充值-支付宝转帐
+    $(".display_10 .btn2.dp4AlTh_btn").click(function() {
+        $(".teaching.dp4AlTh_main").toggle("fade", 350);
+        $('.display_1 .btn2 i').toggleClass('Rotate');
+    });
+    //微信教学开关
+    $(".display_1 .btn2").click(function() {
+        $(".teaching.WchpayTh").toggle("fade", 350);
+        $('.display_1 .btn2 i').toggleClass('Rotate');
+    });
+    //银连教学开关
+    $(".display_7 .btn2 , .cls_elpayth").click(function() {
+        $(".teaching.thelpay").toggle("fade", 350);
+        $('.display_7 .btn2 i').toggleclass('rotate');
+    });
+    //快捷支付-借记卡教学开关
+    $(".display_2 .btn2.dp2KuaiJie_jjk_btn , .cls_KuaiJie_jjkTh").click(function() {
+        $(".teaching.KuaiJie_jjkTh_main").toggle("fade", 350);
+        $('.display_1 .btn2 i').toggleClass('Rotate');
+    });
+
+    //快捷支付-借记卡教学开关
+    $(".display_2 .btn2.dp2KuaiJie_suk_btn , .cls_KuaiJie_sukTh").click(function() {
+        $(".teaching.KuaiJie_sukTh_main").toggle("fade", 350);
+        $('.display_2 .btn2 i').toggleclass('rotate');
+    });
+
+
+
+    // 支付宝教学
+    $(".falp_btn").click(function() {
+        $(".for_aliplay").toggle();
+    });
+    // 支付宝教学
+
+    // 验证码
+    function change_gdcode(e){
+        //this.src = this.src+'?'+Math.random();
+        var src = $(e).attr("src");
+        $(e).attr("src" , src +'?'+ Math.random());
+    }
+    // 验证码
+
+    // 取得优惠编号
+    function getPromoCode(){
+        $("input[name='fr_serialno']").val("d5003f7e11a43124c1f92358bdbba1fd");
+    }
+    // 取得优惠编号
+
+    // 填写验证码时，取得优惠编号。
+    $('#fr_gdcode_bank').focusin(function() {
+        getPromoCode();
+    });
+    $('#fr_gdcode_bank1').focusin(function() {
+        getPromoCode();
+    });
+    // 填写验证码时，取得优惠编号。
+
+    //银行充值，优惠专用。
+    $(document).on("change", '#fr_romo_select', function(){
+        romo_select_val = $(this).find('option:selected').val();
+        romo_select_min_deposit = $(this).find('option:selected').attr('min_deposit');
+        if (romo_select_val != 0 ) {
+            $('#min_1').val(romo_select_min_deposit);
+            $('#min_10').val(romo_select_min_deposit);
+            $('#promo_code').css('display', 'block');
+            $('#promo_code1').css('display', 'block');
+        }else{
+            $('#promo_code').css('display', 'none');
+            $('#promo_code1').css('display', 'none');
+            $("#f1").find('option:selected').removeAttr("selected");
+        }
+    });
+    //微信支付寶轉帳，优惠专用。
+
+
+
+    var is_app = 'mobile';
+    var display_1 = false;
+    var display_2 = false;
+    var display_3 = false;
+    var display_4 = false;
+    var display_5 = false;
+    var display_6 = false;
+    var display_7 = false;
+    var display_9 = false;
+    var display_10 = false;
+
+
+    $(function() {
+        $.ajax({
+            url: 'api/function/bank_list.php',
+            type: 'POST',
+            async:false,
+            dataType: 'json'
+        })
+            .done(function(d) {
+                if(d.success==true) {
+                    var pbank_len = $.map(d.data.pbank, function(n, i) { return i; }).length;
+                    //快捷支付
+                    if (pbank_len >0) {
+                        content='<option cname="default_option" value="-1">请您选择支付银行</option>';
+                        for(var id in d.data.pbank) {
+                            if(d.data.pbank[id].cname!='quickpay' && d.data.pbank[id].cname!='mobaoQpay' && d.data.pbank[id].cname!='quickpay2') continue; //正式环境要删掉quickpay2！！
+                            // if(d.data.pbank[id].cname!='mobaoQpay') continue;
+                            display_2 = true;
+                            content+='<option value="'+id+'" acc="'+d.data.pbank[id].bankindex+'" cname="'+d.data.pbank[id].cname+'" selected>'+d.data.pbank[id].simname+'</option>';
+                        }
+                        $("#action_forms3 select").eq(0).html(content);
+                    }
+
+                    //微信支付
+                    if (pbank_len >0) {
+                        content='<option cname="default_option" value="-1">请您选择支付银行</option>';
+                        for(var id in d.data.pbank) {
+                            if(d.data.pbank[id].cname!='wechatpay2' && d.data.pbank[id].cname!='wechatpay') continue;
+                            // if(d.data.pbank[id].cname!='wechatpay2') continue;
+                            display_1 = true;
+                            content+='<option value="'+id+'" acc="'+d.data.pbank[id].bankindex+'" cname="'+d.data.pbank[id].cname+'" selected>'+d.data.pbank[id].simname+'</option>';
+                        }
+                        $("#action_forms2 select").eq(0).html(content);
+                        //jasper0212
+                        // if(d.data.pbank[id].cname!='wechatcode'){
+                        //     $("#wecode").html('');
+                        // }
+                    }
+
+                    //支付宝
+                    if (pbank_len >0) {
+                        content='<option cname="default_option" value="-1">请您选择支付银行</option>';
+                        for(var id in d.data.pbank) {
+                            if(d.data.pbank[id].cname!='alipay2' && d.data.pbank[id].cname!='alipay') continue;
+                            // if(d.data.pbank[id].cname!='alipay2') continue;
+                            display_3 = true;
+                            content+='<option value="'+id+'" acc="'+d.data.pbank[id].bankindex+'" cname="'+d.data.pbank[id].cname+'" selected>'+d.data.pbank[id].simname+'</option>';
+                        }
+                        $("#action_forms4 select").eq(0).html(content);
+                    }
+
+                    //QQ钱包
+                    if (pbank_len >0) {
+                        content='<option cname="default_option" value="-1">请您选择支付银行</option>';
+                        for(var id in d.data.pbank) {
+                            if(d.data.pbank[id].cname!='qqpay') continue;
+                            display_6 = true;
+                            content+='<option value="'+id+'" acc="'+d.data.pbank[id].bankindex+'" cname="'+d.data.pbank[id].cname+'" selected>'+d.data.pbank[id].simname+'</option>';
+                        }
+                        $("#action_forms6 select").eq(0).html(content);
+                    }
+
+                    //京东支付
+                    if (pbank_len >0) {
+                        content='<option cname="default_option" value="-1">请您选择支付银行</option>';
+                        for(var id in d.data.pbank) {
+                            if(d.data.pbank[id].cname!='jdpay' && d.data.pbank[id].cname!='jdpay2') continue;
+
+                            display_9 = true;
+                            content+='<option value="'+id+'" acc="'+d.data.pbank[id].bankindex+'" cname="'+d.data.pbank[id].cname+'" selected>'+d.data.pbank[id].simname+'</option>';
+                        }
+                        $("#action_forms9 select").eq(0).html(content);
+                    }
+
+
+                    //银联支付
+                    if (pbank_len >0) {
+                        content='<option cname="default_option" value="-1">请您选择支付银行</option>';
+                        for(var id in d.data.pbank) {
+                            if(d.data.pbank[id].cname!='unionpay' && d.data.pbank[id].cname!='unionpay2') continue;
+                            display_7 = true;
+                            content+='<option value="'+id+'" acc="'+d.data.pbank[id].bankindex+'" cname="'+d.data.pbank[id].cname+'" selected>'+d.data.pbank[id].simname+'</option>';
+                        }
+                        $("#action_forms7 select").eq(0).html(content);
+                    }
+
+                    //银行充值
+                    //if (d.data.bank.length > 0 ) {
+                    if (d.data.bank.length !=0) { //modify by eric 20170401
+                        var content='<option>请您选择支付银行</option>';
+                        for(var id in d.data.bank) {
+                            if(id == "5") continue;
+                            if(id == "43") continue;//43 44为 微信银行转帐 支付宝银行转帐
+                            if(id == "44") continue;
+                            display_4 = true;
+                            content+='<option value="'+id+'" bankname="'+d.data.bank[id].simname+'" accountno="'+d.data.bank[id].bankaccountno+'" accountname="'+d.data.bank[id].bankaccountname+'" acc="'+d.data.bank[id].bankacc+'" cname="'+d.data.bank[id].cname+'" selected>'+d.data.bank[id].simname+'</option>';
+                        }
+                        // $("#action_forms1 select").eq(0).html(content)
+                        $("#action_forms1 select").eq(1).html(content)
+                    }
+
+                    //微信支付宝
+                    //if (d.data.bank.length > 0 ) {
+                    if (d.data.bank.length !=0 ) {
+                        var content='<option>请您选择支付银行</option>';
+                        for(var id in d.data.bank) {
+                            if(id == "5") continue;
+                            if(id == "43" || id == "44"){//43 44为 微信银行转帐 支付宝银行转帐
+                                display_10 = true;
+                                content+='<option value="'+id+'" min="'+d.data.bank[id].min+'" max="'+d.data.bank[id].max+'" acc="'+d.data.bank[id].bankacc+'">'+d.data.bank[id].simname+'</option>';
+                            }
+                        }
+                        // $("#action_forms1 select").eq(0).html(content)
+                        $("#action_forms10 select").eq(1).html(content)
+                    }
+                    //在线支付
+                    if (pbank_len >0) {//add by eric 20170401
+                        content='<option cname="default_option" value="-1">请您选择支付银行</option>';
+                        for(var id in d.data.pbank) {
+                            if(d.data.pbank[id].cname =='wechatpay') continue;
+                            if(d.data.pbank[id].cname =='wechatpay2') continue;
+                            if(d.data.pbank[id].cname =='quickpay') continue;
+                            if(d.data.pbank[id].cname =='quickpay2') continue; //正式环境要删掉！！
+                            if(d.data.pbank[id].cname =='mobaoQpay') continue;
+                            if(d.data.pbank[id].cname =='alipay') continue;
+                            if(d.data.pbank[id].cname =='alipay2') continue;
+                            if(d.data.pbank[id].cname =='qqpay') continue;
+                            if(d.data.pbank[id].cname =='unionpay') continue;
+                            if(d.data.pbank[id].cname =='unionpay2') continue;
+                            if(d.data.pbank[id].cname =='wechatcode') continue;
+                            if(d.data.pbank[id].cname =='jdpay') continue;
+                            if(d.data.pbank[id].cname =='jdpay2') continue;
+
+                            display_5 = true;
+                            if (id == '7') {
+                                content+='<option value="'+id+'" acc="'+d.data.pbank[id].bankindex+'" cname="'+d.data.pbank[id].cname+'" selected>'+d.data.pbank[id].simname+'</option>';
+                            }else{
+                                content+='<option value="'+id+'" acc="'+d.data.pbank[id].bankindex+'" cname="'+d.data.pbank[id].cname+'">'+d.data.pbank[id].simname+'</option>';
+                            }
+                        }
+                        $("#action_forms5 select").eq(0).html(content);
+                    }
+                }
+            })
+    });
+
+    //---------------小数点------------------
+    var flag;
+    var num;
+    var rematch;
+    var reslut;
+    var rand;
+
+    $("input[id^='id_amount']").keyup(function(event) {
+        if($(this).attr("id") == "id_amount2"){ //微信(2), 支付宝(4), qq钱包(6) , 银邦(7)
+            $("button[id^='md-trigger']").hide();
+            myFunc1($(this).attr("id"));
+        }
+    });
+
+    $("#f1").change(function(event) { //银行阶层显示银行帐号帐户名 By Jasper
+        $("#bankshow").show();
+        var accountname = $("#f1").find(":selected").attr("accountname");
+        var bankname = $("#f1").find(":selected").attr("bankname");
+        var accountno = $("#f1").find(":selected").attr("accountno");
+        if($("#f1").find(":selected").val() !="请您选择支付银行"){
+            if(accountno == "error"){
+                $("#bankshow").html("支付银行与帐户姓名等资料，请联系<a class='cs_str'>在线客服</a>");
+            }else{
+                $("#bankshow").html("银行："+bankname+"<br>帐号："+accountno+"<br>姓名："+accountname);
+            }
+        }else{
+            $("#bankshow").hide();
+        }
+    });
+
+    function myFunc1(idd){
+        last_num = idd.replace("id_amount","");
+        console.log(last_num);
+        num = $("#"+idd).val();
+        // rematch = /^[0-9]*[1-9][0-9]*$/;
+        rematch = /^\+?[1-9][0-9]*$/;
+        rematch_b = /^[0-9]+(.[0-9]{2})?$/;
+        rematch_c = /^[0-9]+(.[0-9]{0})?$/;
+        rematch_d = /^[0-9]+(.[0]{1})?$/;
+        rematch_e = /^[0-9]+(.[0]{2})?$/;
+        reslut = TestRgexp(rematch, num);
+        reslut_b = TestRgexp(rematch_b, num);
+        reslut_c = TestRgexp(rematch_c, num);
+        reslut_d = TestRgexp(rematch_d, num);
+        reslut_e = TestRgexp(rematch_e, num);
+        rand = Math.floor(Math.random()*89)+11;
+        clearTimeout(flag);
+        flag = setTimeout(function(){
+            if(reslut == true){
+                $("#"+idd).val(num+"."+rand);
+                // $("input:visible").prop("value", num+"."+rand);
+            }else if(reslut_e == true){
+                num_e = Math.floor(num);
+                $("#"+idd).val(num_e+"."+rand);
+            }else if(reslut_b == true){
+                $("#"+idd).parent().parent().parent().find("input").eq(1).val(num);
+            }else if(reslut_c == true){
+                $("#"+idd).val(num+rand);
+            }else if(reslut_d == true){
+                num_d = Math.floor(num);
+                $("#"+idd).val(num_d+"."+rand);
+            }
+            $(":button").show();
+        }, 1000);
+    }
+
+    function TestRgexp(re, s){ // 参数说明 re 为正则表达式 s 为要判断的字符
+        return re.test(s)
+    }
+    //---------------小数点------------------
+
+
+    function amount_checker(id){
+
+        if (id == 1 || id == 2) {           return false;
+        }
+        if($('#id_amount'+id).val().match(/[0-9]+[.]{1}[0-9]{1,2}$/) && $('#id_amount'+id).val()>0){
+            // $("ul[class='col01-money-step l']").find('li:eq(4)').addClass('on');
+            return true;
+        }else{
+            // $("ul[class='col01-money-step l']").find('li:eq(4)').removeClass('on');
+            //$(".Pop_up_title").html('充值金额需填正整数');
+            return false;
+        }
+    }
+    function change_bank(e){
+        var id = e.id.substr(1);
+        var index = $(e).val();
+        var min = '0.000';
+
+        // romo_select_val = $('#fr_romo_select').find('option:selected').val();
+        // if (romo_select_val != '0') {
+        // if (id == '4' || id == '10') {
+        //     min = $('#fr_romo_select').find('option:selected').attr('min_deposit'); //romo_select_min_deposit
+        // }else{
+        //     min = $(e).find('option[value='+index+']').attr('min');
+        // }
+        if (id == '1' || id == '10') {
+            min = $('#action_forms'+id).find("select#fr_romo_select option:selected").attr('min_deposit');
+        }else{
+            min = $(e).find('option[value='+index+']').attr('min');
+        }
+        // var min = $(e).find('option[value='+index+']').attr('min');
+        var max = $(e).find('option[value='+index+']').attr('max');
+        var acc = $(e).find('option[value='+index+']').attr('acc');
+        var cname = $(e).find('option[value='+index+']').attr('cname');
+        $("#bankacc_"+id).val(acc);//post
+        //default_option 是因为下拉是选单，如果为空值会把它判断改变上、下限所以才新增的。
+        if( cname != 'wechatpay2' && cname != 'wechatpay' && cname != 'alipay' && cname != 'quickpay' && cname != 'default_option' && cname != 'ABOC' && cname != 'ICBK' && cname != 'COMM' && cname != 'PCBC' && cname != 'BKCH' && cname != 'CMBC' && cname != 'GDBK' && cname != 'PSBC' && cname != 'CIBK' && cname != 'EVER' && cname != 'MSBC' && cname != 'WbeBank' && cname != 'jdpay2' && cname != 'jdpay'){
+            $("#min_"+id).val(min);
+            $("#max_"+id).val(max);
+            // $("#amount_range").html('￥20.00 ~ ￥3,000.00');
+        }
+
+        //jasper0212test
+        // if(cname == 'wechatcode'){
+        //      //$("#id_amount2").parent().parent().append('<li><h3>密码</h3><input class="enter" name="fr_code" id="id_code2" maxlength="18"></li>');
+        //      $("#wecode").html('<li><h3>密码</h3><input class="enter" name="fr_code" id="id_code2" maxlength="18"></li>');
+        // }else{
+        //     $("#wecode").html('');
+        // }
+    }
+
+    function validation(id){
+
+        var valid = true;
+        var mesg = '';
+        var check_amount_error = false;
+        $(".save_button"+id).attr( "disabled", "disabled" );
+        alert_box('系统处理中,请稍后','false', 'false');
+
+        check_amount_error = amount_checker(id);
+        if(check_amount_error){
+            valid = false;
+            mesg = '充值金额需填正整数';
+            $(".save_button"+id).removeAttr('disabled');
+            alert_box(mesg,'true', 'false');
+        }
+
+        if (valid){
+
+            if(isNaN($('#action_forms'+id+' select[name="fr_deposit_bank"]').val())){
+                valid = false;
+                mesg = "请您选择一间银行";
+                $(".save_button"+id).removeAttr('disabled');
+                alert_box(mesg,'true', 'false');
+            }
+        }
+        if(id == "1"){
+            if($("#id_accountName").val() == ""){
+                valid = false;
+                mesg = "请填写您的打款人姓名或是您的支付宝帐户姓名";
+                $(".save_button"+id).removeAttr('disabled');
+                alert_box(mesg,'true', 'false');
+            }
+
+            var promo_select = $('#fr_romo_select').find('option:selected').val();
+            if ($('#fr_gdcode_bank').val() == "" && promo_select != "0") {
+                valid = false;
+                mesg = "请填写验证码";
+                $(".save_button"+id).removeAttr('disabled');
+                alert_box(mesg,'true', 'false');
+            }
+        }
+        if(id == "10"){
+            if($("#id_accountName1").val() == ""){
+                valid = false;
+                mesg = "请填写您的打款人姓名或是您的支付宝帐户姓名";
+                $(".save_button"+id).removeAttr('disabled');
+                alert_box(mesg,'true', 'false');
+            }
+
+            var promo_select = $('#fr_romo_select').find('option:selected').val();
+            if ($('#fr_gdcode_bank').val() == "" && promo_select != "0") {
+                valid = false;
+                mesg = "请填写验证码";
+                $(".save_button"+id).removeAttr('disabled');
+                alert_box(mesg,'true', 'false');
+            }
+        }
+
+        if (valid){
+            var deposit_amount = parseFloat($('#id_amount'+id).val());
+            var min_deposit = parseFloat($("#min_"+id).val());
+            var max_deposit = parseFloat($("#max_"+id).val());
+            console.log("min"+id);
+            console.log("de"+deposit_amount);
+
+            switch(id) {
+                case '1':
+                    var payName =  "银行充值";
+                    break;
+                case '2':
+                    var payName =  "微信支付";
+                    break;
+                case '3':
+                    var payName =  "快捷支付";
+                    break;
+                case '4':
+                    var payName =  "支付宝支付";
+                    break;
+                case '5':
+                    var payName =  "在線支付";
+                    break;
+                case '6':
+                    var payName =  "QQ钱包";
+                    break;
+                case '7':
+                    var payName =  "银联支付";
+                    break;
+                case '9':
+                    var payName =  "京东支付";
+                    break;
+                case '10':
+                    var payName =  "微信支付宝";
+                    break;
+                default:
+                    break;
+            }
+            if (deposit_amount < min_deposit){
+                valid = false;
+                if(id == "10" || id == "1"){
+                    mesg = payName+"申请2％优惠，存款金额最低"+min_deposit+"块";
+                }else{
+                    mesg = payName+"最低充值"+min_deposit+"块";
+                }
+                alert_box(mesg,'true', 'false');
+            }
+            if (deposit_amount > max_deposit){
+                valid = false;
+                if(id == "10" || id == "1"){
+                    mesg = payName+"申请2％优惠，存款金额最高"+max_deposit+"块";
+                }else{
+                    mesg = payName+"最大充值"+max_deposit+"块";
+                }
+
+                alert_box(mesg,'true', 'false');
+            }
+            $(".save_button"+id).removeAttr('disabled');
+        }
+
+
+        if(valid){
+            $.ajax({
+                url: "../ty/u_deposit-action",
+                data: $("#action_forms" + id).serialize(),
+                type: "POST",
+                dataType:"json",
+                success: function( d ) {
+                    if(d.error==true){
+                        switch (d.msg){
+                            case "1" :
+                                mesg = '请您选择支付银行';
+                                break;
+                            case "2" :
+                                mesg = '金额不可为空值';
+                                break;
+                            case "3" :
+                                mesg = '充值金额异常';
+                                break;
+                            case "4" :
+                                mesg = '金额必需为数字';
+                                break;
+                            case "5" :
+                                mesg = '充值金额低于下限';
+                                break;
+                            case "6" :
+                                mesg = '充值金额超过上限';////ok
+                                break;
+                            case "7" :
+                                mesg = '优惠验证码错误';
+                                break;
+                            case "8" :
+                                mesg = '请联络客服人员';
+                                break;
+                            case "9" :
+                                mesg = '请输入有小数点金额';
+                                break;
+                            case "10" :
+                                mesg = '手机直连单笔最高3000';
+                                break;
+                            case "18" :
+                                mesg = '支付宝手机支付请输入正确金额';
+                                break;
+                            case "44" :
+                                mesg = '当日微信存款限额3000';
+                                break;
+                        }
+                    }else{
+                        if(d.url != undefined){
+                            if(id=='2'||id=='3'||id=='4' ||id=='5' || id=='6' || id=='7' || id=='9'){
+                                var Sys = {};
+                                var ua = navigator.userAgent.toLowerCase();
+                                var s;
+                                (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? Sys.ie = s[1] :
+                                    (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+                                        (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+                                            (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+                                                (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+                                                    (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+                                // if(is_app == 'app'){
+                                //     tmp_url = '../ty/u_payment?u='+d.url.replace("?", "&");
+                                //     $.get(tmp_url, function(data) {
+                                //         tmp = data.replace(/\"/g,"'");
+                                //         tmp = btoa(tmp);
+                                //         tmp = tmp.replace(/\+/g,"_");
+                                //         var data_url = location.protocol+"//vip77765.com/ty/tymobile_new/redirect.php?u="+tmp;
+                                //         openbrowser(data_url);
+                                //     });
+
+
+                                // }else
+                                d.url = d.url.replace("?", "&");
+                                if (id != "2"){                                d.url = d.url.replace("https", "http");
+                                }
+                                if(Sys.chrome || Sys.ie){
+                                    tmp_url = '../ty/u_payment?u='+d.url;
+                                    // console.log(tmp_url);
+                                    // window.open(tmp_url,"_blank",'width=1000,height=600,resizable=yes');
+                                    var newWindow = window.open("../ty/u_payment","_blank",'width=1000,height=600,resizable=yes');
+                                    newWindow.location.href = tmp_url;
+                                }else{
+                                    window.location.href = '../ty/u_payment?u='+d.url;
+                                }
+                            }
+                            //$(".md-overlay").click();
+                            //$(".btn_ui").hide();
+                        }else{
+                            if (d.ledgerindex == undefined){
+                                mesg = '充值提交成功';
+                            }else{
+                                mesg = '充值提交成功单号:' + d.ledgerindex;
+                            }
+                            // $("ul[class='col01-money-step l']").find('li:eq(6)').addClass('on');
+                        }
+                    }
+                },
+                error: function ( xhr, ajaxOptions, thrownError ){
+                    if (undefined != newWindow){
+                        newWindow.close();
+                    }
+                    $('#pop_button').click();
+                    alert_box(thrownError,'true', 'false');
+                },
+                complete: function( d ){
+
+
+                    if ( mesg != ''){
+                        alert_box(mesg,'true', 'false');
+                    }
+
+                    /*wjf步骤 */
+                    if(id=='4') {
+                        $(".step2").show();
+                        $(".step1").hide();
+                        setTimeout(function(){$(".tab-con-item").eq(2).click();},1000);
+                    }
+                    /*wjf步骤 */
+                    /*支付宝步骤 */
+                    if(id=='5'){
+                        $(".step2_aliplay").show();
+                        $(".step1_aliplay").hide();
+                        setTimeout(function(){$(".tab-con-item").eq(2).click();},1000);
+                    }
+                    /*支付宝步骤 */
+                    $(".save_button"+id).removeAttr('disabled');
+                }
+            });
+        }
+
+        $(".save_button"+id).removeAttr('disabled');
+
+    }
+
+
+    $(function(){
+        cs();//重新帶入cs聯絡資訊
+        display_array = {
+            display_5 : display_5,
+            display_1 : display_1,
+            display_2 : display_2,
+            display_3 : display_3,
+            display_4 : display_4,
+            display_6 : display_6,
+            display_7 : display_7,
+            display_9 : display_9,
+            display_10 : display_10
+        };
+        var countDisplay = 0;
+        display_current = false;
+        $.each(display_array, function( index, value ) {
+            if (value == true) {
+                countDisplay++;
+                $("."+index).css('display','');
+                $("."+index+"_title").css('display', 'block');
+                if (display_current == false) {
+                    display_current = true;
+                    $("."+index).css('display', 'block');
+                    $("."+index+"_title").css('display', 'block');
+                    $("."+index+"_title").attr('class', 'current');
+                }
+            }
+        });
+        if(countDisplay == 1){
+            countDisplay = 2;
+        }
+        // $("#displayShow").attr("class","tab-nav_counter j-tab-nav_mob tab_btn"+countDisplay);
+        $("#displayShow").attr("class","tab-nav_counter j-tab-nav_mob tab_btn3");
+
+    })
+</script>
+
+
+<!-- 底部导航 -->
+<footer>
+    <ul>
+        <li onclick="javascript:void(0);location.href='user.php'"><i class="fa fa-home"></i><p>首页</p></li>
+        <li onclick="javascript:void(0);location.href='user_deposit.php'"><i class="fa fa-credit-card"></i><p>充值</p></li>
+        <li onclick="cs()"><a class="cs_str" href="https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&amp;configID=49259&amp;jid=2028701177&amp;s=1&amp;lan=zh" target="_blank"><i class="fa fa-commenting"></i><p>客服</p></a></li>
+        <li onclick="javascript:void(0);location.href='user_myaccount.php'"><i class="fa fa-user-circle"></i><p>我的</p></li>
+    </ul>
+</footer>
+<div class="page_bg"></div>
+
+
+
+<!-- 弹窗 -->
+<div class="pop_bg"></div>
+<div id="all_pop"></div>
+<div class="Pop-up pop_close">
+    <div class="btn_close pop_cls close_event" id="pop_button_cancel_x"><i class="fa fa-times"></i></div>
+    <p id="pop_text">　　</p>
+    <button id="pop_button_check" value="cnfrm_yes" class="method_btn">确定</button>
+    <button id="pop_button_cancel" value="cnfrm_no" class="method_btn">取消</button>
+</div>
+<!-- 弹窗 -->
+
+<!-- 弹窗 -->
+<script>
+    $(".pop_bg , .close_event , .Pop-up button").on('click', function() {
+        // setTimeout(function(){ $('#pop_text').text('　　'); }, 300);
+        $(".pop_bg").fadeOut('350');
+        $(".pop_close").fadeOut('350');
+
+
+    });
+
+</script>
+<!-- 弹窗 -->
+
+<!-- cs -->
+<script>
+    $(function(){
+        cs();//第一次cs聯絡資訊
+        agent();
+    })
+    function cs(){
+        var cs_str = "https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&configID=49259&jid=2028701177&s=1&lan=zh";
+        $('.cs_str').attr({
+            href: cs_str,
+            target: '_blank'
+        });
+    }
+    function agent(){
+        var agent_str = "https://ty7776.com/agent/";
+        $('.agent_str').attr({
+            href: agent_str,
+            target: '_blank'
+        });;
+    }
+</script>
+<!-- cs -->
+
+<!-- 頁面切換 -->
+<script type="text/javascript">
+
+    function load_page(page_name){
+        $(window).scrollLeft("0");
+        $(window).scrollTop("0");
+        $(".main").load(page_name);
+        $.ajax({
+            url: '../../ty/station_msg_ajax.php',
+            type: 'POST',
+            dataType: 'json',
+            async:false,
+            data: {
+                from: 'mobile_find',
+                id: '337451',
+            },
+        })
+            .done(function(d) {
+                console.log(d.msg);
+                if (d.msg == 'is_read') {
+                    $('.station').removeClass('fa-info-circle');
+                }else if (d.msg == 'not_read') {
+                    $('.station').addClass('fa-info-circle');
+                }
+                console.log("success");
+            })
+            .fail(function() {
+                console.log("error");
+            });
+
+    }
+</script>
+
+<!-- 登入注册tab -->
+<script>
+    $(function() {
+        $(document).on("click", '#logout', function(){
+            $.ajax({
+                url: 'api/function/check.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {type:'logout'}
+            })
+                .done(function() {
+                    console.log("success");
+                    location.href='./index.php'
+                })
+                .fail(function() {
+                    console.log("error logout");
+                })
+        });
+
+        $.ajax({
+            url: '../ty/u_transfer-ajax?com=main',
+            type: 'POST',
+            dataType: 'json',
+            data : {com : "main"}
+        })
+            .done(function(d) {
+                if(parseInt(d.total)>=0) {
+                    $("#main_ccl").text(d.total)
+                } else {
+                    $("#main_ccl").text("00.0")
+                }
+            })
+
+        $(document).on("click", '.go_tsfBtn', function(){
+            maintenance_from = 'down_tran';
+            $(".go_tsfBtn").attr('disabled','disabled');
+            var ein = document.getElementById("walletin");
+            var comin = ein.options[ein.selectedIndex].value;
+            var eout = document.getElementById("walletout");
+            var comout = eout.options[eout.selectedIndex].value;
+            var fr_transfer_amt=$("#fr_transfer_amt").val();
+            var tmp_fr_gamefrom=comin;
+            var tmp_fr_gameto=comout;
+
+            if( comin=='0') {
+                tmp_fr_gamefrom='main';
+            }
+            if( comout=='0') {
+                tmp_fr_gameto='main';
+            }
+
+            maintenance(tmp_fr_gamefrom);
+            maintenance_status_from = tmp_maintenance_status;
+            maintenance(tmp_fr_gameto);
+            maintenance_status_to   = tmp_maintenance_status;
+
+            if (maintenance_status_from == 'fail' || maintenance_status_to == 'fail') {
+                var tmp_m_str = '';
+                if (maintenance_status_from == 'fail') {
+                    tmp_m_str = tmp_fr_gamefrom;
+                }else{
+                    tmp_m_str = tmp_fr_gameto;
+                }
+
+                alert_box(tmp_m_str + '平台維護中','true','false');
+
+            } else if ( tmp_fr_gamefrom == tmp_fr_gameto) {
+                alert_box('请选择不同的平台转帐','true','false');
+
+            }else{
+
+                $.ajax({
+                    url: '../ty/u_transfer-action',
+                    type: 'POST',
+                    dataType: 'json',
+                    async : false,
+                    data: {
+                        fr_transfer_type : 'transfer',
+                        fr_gamefrom : comin,
+                        fr_gameto : comout,
+                        fr_transfer_amt : fr_transfer_amt}
+                })
+                    .done(function(d) {
+                        if(d.error==false) {
+                            var tmp_switch = maintenance_switch;
+                            if (maintenance_switch == 'auto' &&  maintenance_from == 'down_tran') {
+                                maintenance_switch = 'hand';
+                            }
+                            getccl(tmp_fr_gameto);
+                            getccl(tmp_fr_gamefrom);
+                            if (tmp_switch == 'auto' && maintenance_from == 'down_tran') {
+                                maintenance_switch = 'auto';
+                            }
+                            alert_box("转帐成功",'true','false');
+                        } else {
+                            alert_box(d.msg,'true','false');
+                        }
+
+
+                    })
+            }
+
+            name_arr=[];
+            name_arr['0']='【中心钱包】';
+            name_arr['bbin']='【BB波音平台】';
+            name_arr['ag_ag']='【AG环亚平台】';
+            name_arr['mg']='【MG摩卡平台】';
+            name_arr['avia']='【OG東方平台】';
+            name_arr['pteurope']='【PT电子】';
+            name_arr['hb']='【HB电子】';
+            name_arr['nt']='【NT电子】';
+            name_arr['allbet']='【AllBet欧博平台】';
+            name_arr['inteplay']='【INTEPLAY电子】';
+            name_arr['gg']='【GG捕鱼】';
+            name_arr['qt']='【QT电子】';
+            name_arr['ibc']='【IBC沙巴】';
+            name_arr['ttg']='【TTG电子】';
+            maintenance_from = '';
+            tmp_maintenance_status = '';
+            $(".go_tsfBtn").attr('disabled', false);
+        });
+    });
+
+    var maintenance_switch = 'auto';
+    var maintenance_from = '';
+
+    function getccl(com){
+        if (maintenance_switch == 'hand') {
+            maintenance(com);
+        }
+        var tmp_status = $('#'+com+'_ccl').attr('data-status');
+        if (tmp_status == 'working' || maintenance_switch == 'hand' ) {
+            $.ajax({
+                url: '../ty/u_transfer-ajax?com='+com,
+                type: 'POST',
+                dataType: 'json',
+                data : {com :com}
+            })
+                .done(function(d) {
+                    if (com == 'main') {
+                        $("#"+com+"_ccl").text(d.total);
+                    }else{
+                        if (tmp_status != 'working') {
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("维护中");
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').css("color","#ff932b");
+                        }else if(parseInt(d.total)>=0){
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text(d.total);
+                        }else{
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("系统异常");
+                        }
+                        $("#"+com+"_ccl").parent().find('i').removeClass('fa-spin');
+                    }
+                })
+                .fail(function() {
+                    console.log("fail");
+                })
+        }else{
+            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("维护中");
+            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').css("color","#ff932b");
+            $("#"+com+"_ccl").parent().find('i').removeClass('fa-spin');
+        }
+    }
+
+    var  tmp_maintenance_status = '';//用来存下方转帐判断有无维护用
+
+    function maintenance(com){
+        $.ajax({
+            url: 'api/function/maintenance.php',
+            type: 'POST',
+            dataType: 'json',
+            async:false,
+            data: {com: com}
+        })
+            .done(function(d) {
+                if ( com  == 'all') {//我的 => 转帐
+                    $.each(d.data, function(index, val) {
+                        $.each(val, function(s_index, s_val) {
+                            $('#'+s_index+'_ccl').attr('data-status', s_val);
+                        });
+                    });
+                }else{//用来存下方转帐判断有无维护用
+                    if (d.success == true) {
+                        tmp_maintenance_status = 'success';
+                    }else{
+                        tmp_maintenance_status = 'fail';
+                    }
+                }
+
+            })
+    }
+
+    function window_open(url){
+        wdth = $(window).width();
+        height = $(window).height();
+        window.open(url,'blank','width='+wdth,'height='+height);
+
+    }
+
+</script>
+
+<script type="text/javascript" src="js/index.js"></script>
+
+
+<!-- app open -->
+<script src="https://static.ydbimg.com/API/YdbOnline.js"></script>
+<script>
+    function openbrowser(url){
+        var YDB = new YDBOBJ();
+        YDB.OpenWithSafari(url);
+        console.log(url);
+    }
+    $(document).on('click', '.app_open', function(event) {
+        var tmp_url = $(this).attr('data-href');
+        $.get(tmp_url, function(data) {
+            // console.log(data);
+            openbrowser(data);
+        });
+        event.preventDefault();
+    });
+    $(document).on('click', '.app_open_bb', function(event) {
+        var tmp_url = $(this).attr('data-href');
+        $.get(tmp_url, function(data) {
+            tmp = data.replace(/\"/g,"'");
+            tmp = btoa(tmp);
+            tmp = tmp.replace(/\+/g,"_");
+            // console.log(tmp);
+            var data_url = location.protocol+"//vip77765.com/tymobile_new/redirect.php?u="+tmp;
+            openbrowser(data_url);
+        });
+        event.preventDefault();
+    });
+    //cnzz
+    var cz = document.createElement("script");
+    cz.src = "//s11.cnzz.com/z_stat.php?id=1261102673&web_id=1261102673";
+    document.getElementsByTagName('body')[0].appendChild(cz);
+
+    function reset_wallet(){
+        $("#walletin,#walletout").html("");
+        $.each(plate_arr, function(index, val) {
+            if (index==0) {
+                $("#walletin").append(val);
+            }else{
+                $("#walletout,#walletin").append(val);
+            }
+        });
+    }
+
+</script>
+<!-- app open -->
+
+
+
+</body></html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <title>添运国际手机版</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+    <meta name="HandheldFriendly" content="true">
+
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="shortcut icon" href="images/favicon.png">
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css?v3">
+    <link type="text/css" rel="stylesheet" href="css/page.css?v9">
+    <link type="text/css" rel="stylesheet" href="css/user.css?v4">
+    <link type="text/css" rel="stylesheet" href="css/main.css?v1">
+
+    <script src="js/jquery-1.8.3.min.js"></script><!-- 1.8.3 -->
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.lazyload.min.js"></script><!-- 延时载入 -->
+    <script src="js/tabs.js"></script><!-- tabs -->
+    <!--   <script src="js/socket.io.js?v1"></script> -->
+    <script type="text/javascript">
+        // function alert_box(message, showbutton = 'true', confirm = 'false'){//show确定、取消按钮
+        function alert_box(message, showbutton, confirm ){//show确定、取消按钮
+            if (showbutton == 'false') {
+                $('#pop_button_check').css('display','none');
+                $('#pop_button_cancel_x').css('display','none');
+            }else{
+                $("#pop_button_check").css('display','');
+                $('#pop_button_cancel_x').css('display','');
+            }
+            if (showbutton == 'true' && confirm == 'true') {
+                $("#pop_button_cancel").css('display','');
+            }else{
+                $("#pop_button_cancel").css('display','none');
+            }
+            $(".pop_bg , .Pop-up").fadeIn('350');
+            setTimeout(function(){ $('#pop_text').html(message); }, 300);
+        }
+        $(function(){
+            var page_name = location.pathname;
+            if(page_name == "/tymobile_new/user.php"){
+                $(".back").hide();
+            }
+        });
+
+        //socket detect
+        var device = "phone";
+
+    </script></head>
+
+
+
+<body>
+
+<header class="top_login">
+    <div class="back" onclick="history.back();"><i class="fa fa-chevron-left"></i>返回</div>
+    <div class="logo" onclick="javascript:void(0);location.href='user.php'"></div>
+    <div class="top_right">
+        <i class="fa fa-database"></i>
+        <p id="main_ccl">0.00</p>
+    </div>
+</header>
+
+
+
+<a href="javascript:" id="go_top" style="display: inline;"><i class="fa fa-chevron-up" aria-hidden="true"></i></a><!-- 返回顶端 -->
+<main class="main remind">
+
+    <div class="tab" id="tab_mob">
+        <div class="tab-nav_counter j-tab-nav_mob tab_btn2">
+            <a class="current" href="javascript:void(0);">一般讯息</a>
+            <a href="javascript:void(0);">维护通知</a>
+        </div>
+
+        <div class="tab-con_counter">
+            <div class="j-tab-con_mob">
+
+                <div class="tab-con-item" style="display:block;">
+                    <div class="rembox_cont"><p><strong>2018-07-08</strong></p><p>★重要通知★：添运的收款银行帐户会不定期更换，请您在每次转帐汇款充值前重新获取最新的收款帐户，如存款至停用的收款帐户，公司无法查收，恕不负责！
+                        添运感谢您的支持与爱护!!≧▽≦y</p></div><div class="rembox_cont"><p><strong>2018-07-08</strong></p><p>★尊敬的会员，目前微信支付、QQ扫码支付、京东扫码支付维护中，请玩家多多使用在线支付、银联扫码、银行入款、快捷支付、支付宝扫码支付入款唷～</p></div><div class="rembox_cont"><p><strong>2018-07-09</strong></p><p>★VR彩票维护★维护VR彩种：天津时时彩、VR六合彩、江苏快三 临时维护，造成您的不便，请见谅，亲们可以先游戏VR彩票平台其他彩票游戏唷♥</p></div><div class="rembox_cont"><p><strong>2018-05-31</strong></p><p>亲爱的会员您好，目前AG电子部份游戏进行维护，分别为赛亚烈战
+                    、快乐农庄、英雄荣耀、龙凤呈祥，建议亲们可以先娱乐其他游戏，造成您的不便，请您见谅！</p></div><div class="rembox_cont"><p><strong>2018-04-16</strong></p><p>【重要公告】尊敬的会员您好，添运国际最低提现更改为￥100人民币。感谢您对添运国际的支持与爱护，谢谢您。</p></div><div class="rembox_cont"><p><strong>2018-02-02</strong></p><p>▋尊敬的会员，如您开启网页时非本公司网站或您无法使用官网联系添运国际线上客服时，请加入添运国际客服QQ(77783320 ),或是与微信客服联系！（请备注您的会员帐号）</p></div><div class="rembox_cont"><p><strong>2018-03-21</strong></p><p>★★★救援金输值反还10％ 限定电子游戏平台，已改为于次日北京时间15：00后申请前一日输值反送唷，请各位亲们注意领取时间唷 (•̀ㅂ•́)و✧</p></div><div class="rembox_cont"><p><strong>2017-12-15</strong></p><p>【重要公告】因国内大规模支付渠道紧缩，导致部分地区入款受阻无法正常游戏！
+                    添运国际温馨建议您联系在线客服，提供您最即时有保障的支付方式</p></div><div class="rembox_cont"><p><strong>2018-02-05</strong></p><p>『重要公告』开元棋牌目前不列入反水计算，为您带来的不便，敬请见谅！</p></div><div class="rembox_cont"><p><strong>2018-02-06</strong></p><p>『重要公告』请会员勿游戏本公司尚未提供之游戏种类，若游戏本公司尚未提供之游戏种类，所有派彩将不列入计算！例：PT真人游戏等</p></div><div class="rembox_cont"><p><strong>2018-03-13</strong></p><p>▋六合幸运码参加方法：每期香港六合彩截止下注时间之前，累积充值200元以上的会员均可参加「六合幸运码对对碰」。只要您绑定的六合幸运码与当期香港六合彩的开奖号码一致，您就可以获得六合彩彩金，最高8888元！请立即前往“帐户中心”-&gt;“安全设置”，绑定您的「六合幸运码」。惊喜大奖随时送出！！</p></div><div class="rembox_cont"><p><strong>2018-03-13</strong></p><p>★ MG平台 ★例行维护于每周（三）北京时间 08:00～12:00，为您带来的不便，敬请见谅！亲们可以先游戏公司其他平台唷≧▽≦y</p></div><div class="rembox_cont"><p><strong>2017-08-16</strong></p><p>★AGIN中的国际厅、竞咪厅★例行维护于每周（二）北京时间 10：00 至 11：00，其余游戏厅皆可正常进行游戏。</p></div><div class="rembox_cont"><p><strong>2017-08-16</strong></p><p>★AGIN中的旗舰厅、VIP厅★
+                    例行维护于每周（一）北京时间 11：30 至 13：00，其余游戏厅皆可正常进行游戏。</p></div><div class="rembox_cont"><p><strong>2017-12-15</strong></p><p>★★ 添运国际提醒您～ 为了让游戏更顺畅，第1次游戏的会员请先从中心钱包转款到游戏钱包，再开始游戏哦 ★★</p></div><div class="rembox_cont"><p><strong>2017-12-15</strong></p><p>【重要公告】尊敬的会员您好，近期网络出现冒充添运国际客服QQ及客服微信诈骗会员存款。请各位会员务必透过官网提供上分方式存款，以维护您自身的金钱安全。</p></div><div class="rembox_cont"><p><strong>2017-12-15</strong></p><p>尊敬的会员您好！由于近日网站劫持猖狂，如开启非本公司网站或无法有效开启网页时，请多加利用线上客服系统，QQ客服，微信客服与本公司联系，或直接前往ty777.top选择备用域名进入本公司，切勿在非本公司网站提供个人相关资讯以维护您的帐户资料及资金安全！感谢您对添运国际的支持！</p></div><div class="rembox_cont"><p><strong>2018-05-15</strong></p><p>『重要公告』★全站例行维护：于每周（三）北京时间 9：00 至 11：00，添运国际全站系统升级中，请各位会员敬请期待！提醒您：维护期间无法提供查询或游戏服务～造成您的不便，敬请见谅ヽ(●´∀`●)ﾉ</p></div><div class="rembox_cont"><p><strong>2018-06-19</strong></p><p>★欧博平台★例行维护：于北京时间每周三 05：00～12：00结束。为您带来的不便，敬请见谅！亲们可以先游戏其他平台唷O(∩_∩)O。</p></div><div class="rembox_cont"><p><strong>2018-05-04</strong></p><p>★OG视讯★ 例行维护：于北京时间每周一 6：00-8：00结束。为您带来的不便，敬请见谅！亲们可以先游戏其他平台唷O(∩_∩)O。</p></div>				</div>
+
+                <div class="tab-con-item">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- tab -->
+<script type="text/javascript">
+    $("#tab_mob").rTabs_mob({
+        bind : 'click',
+        animation : 'fadein'
+    });
+</script>
+
+
+<!-- 底部导航 -->
+<footer>
+    <ul>
+        <li onclick="javascript:void(0);location.href='user.php'"><i class="fa fa-home"></i><p>首页</p></li>
+        <li onclick="javascript:void(0);location.href='user_deposit.php'"><i class="fa fa-credit-card"></i><p>充值</p></li>
+        <li onclick="cs()"><a class="cs_str" href="https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&amp;configID=49259&amp;jid=2028701177&amp;s=1&amp;lan=zh" target="_blank"><i class="fa fa-commenting"></i><p>客服</p></a></li>
+        <li onclick="javascript:void(0);location.href='user_myaccount.php'"><i class="fa fa-user-circle"></i><p>我的</p></li>
+    </ul>
+</footer>
+<div class="page_bg"></div>
+
+
+
+<!-- 弹窗 -->
+<div class="pop_bg"></div>
+<div id="all_pop"></div>
+<div class="Pop-up pop_close">
+    <div class="btn_close pop_cls close_event" id="pop_button_cancel_x"><i class="fa fa-times"></i></div>
+    <p id="pop_text">　　</p>
+    <button id="pop_button_check" value="cnfrm_yes" class="method_btn">确定</button>
+    <button id="pop_button_cancel" value="cnfrm_no" class="method_btn">取消</button>
+</div>
+<!-- 弹窗 -->
+
+<!-- 弹窗 -->
+<script>
+    $(".pop_bg , .close_event , .Pop-up button").on('click', function() {
+        // setTimeout(function(){ $('#pop_text').text('　　'); }, 300);
+        $(".pop_bg").fadeOut('350');
+        $(".pop_close").fadeOut('350');
+
+
+    });
+
+</script>
+<!-- 弹窗 -->
+
+<!-- cs -->
+<script>
+    $(function(){
+        cs();//第一次cs聯絡資訊
+        agent();
+    })
+    function cs(){
+        var cs_str = "https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&configID=49259&jid=2028701177&s=1&lan=zh";
+        $('.cs_str').attr({
+            href: cs_str,
+            target: '_blank'
+        });
+    }
+    function agent(){
+        var agent_str = "https://ty7776.com/agent/";
+        $('.agent_str').attr({
+            href: agent_str,
+            target: '_blank'
+        });;
+    }
+</script>
+<!-- cs -->
+
+<!-- 頁面切換 -->
+<script type="text/javascript">
+
+    function load_page(page_name){
+        $(window).scrollLeft("0");
+        $(window).scrollTop("0");
+        $(".main").load(page_name);
+        $.ajax({
+            url: '../../ty/station_msg_ajax.php',
+            type: 'POST',
+            dataType: 'json',
+            async:false,
+            data: {
+                from: 'mobile_find',
+                id: '337451',
+            },
+        })
+            .done(function(d) {
+                console.log(d.msg);
+                if (d.msg == 'is_read') {
+                    $('.station').removeClass('fa-info-circle');
+                }else if (d.msg == 'not_read') {
+                    $('.station').addClass('fa-info-circle');
+                }
+                console.log("success");
+            })
+            .fail(function() {
+                console.log("error");
+            });
+
+    }
+</script>
+
+<!-- 登入注册tab -->
+<script>
+    $(function() {
+        $(document).on("click", '#logout', function(){
+            $.ajax({
+                url: 'api/function/check.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {type:'logout'}
+            })
+                .done(function() {
+                    console.log("success");
+                    location.href='./index.php'
+                })
+                .fail(function() {
+                    console.log("error logout");
+                })
+        });
+
+        $.ajax({
+            url: '../ty/u_transfer-ajax?com=main',
+            type: 'POST',
+            dataType: 'json',
+            data : {com : "main"}
+        })
+            .done(function(d) {
+                if(parseInt(d.total)>=0) {
+                    $("#main_ccl").text(d.total)
+                } else {
+                    $("#main_ccl").text("00.0")
+                }
+            })
+
+        $(document).on("click", '.go_tsfBtn', function(){
+            maintenance_from = 'down_tran';
+            $(".go_tsfBtn").attr('disabled','disabled');
+            var ein = document.getElementById("walletin");
+            var comin = ein.options[ein.selectedIndex].value;
+            var eout = document.getElementById("walletout");
+            var comout = eout.options[eout.selectedIndex].value;
+            var fr_transfer_amt=$("#fr_transfer_amt").val();
+            var tmp_fr_gamefrom=comin;
+            var tmp_fr_gameto=comout;
+
+            if( comin=='0') {
+                tmp_fr_gamefrom='main';
+            }
+            if( comout=='0') {
+                tmp_fr_gameto='main';
+            }
+
+            maintenance(tmp_fr_gamefrom);
+            maintenance_status_from = tmp_maintenance_status;
+            maintenance(tmp_fr_gameto);
+            maintenance_status_to   = tmp_maintenance_status;
+
+            if (maintenance_status_from == 'fail' || maintenance_status_to == 'fail') {
+                var tmp_m_str = '';
+                if (maintenance_status_from == 'fail') {
+                    tmp_m_str = tmp_fr_gamefrom;
+                }else{
+                    tmp_m_str = tmp_fr_gameto;
+                }
+
+                alert_box(tmp_m_str + '平台維護中','true','false');
+
+            } else if ( tmp_fr_gamefrom == tmp_fr_gameto) {
+                alert_box('请选择不同的平台转帐','true','false');
+
+            }else{
+
+                $.ajax({
+                    url: '../ty/u_transfer-action',
+                    type: 'POST',
+                    dataType: 'json',
+                    async : false,
+                    data: {
+                        fr_transfer_type : 'transfer',
+                        fr_gamefrom : comin,
+                        fr_gameto : comout,
+                        fr_transfer_amt : fr_transfer_amt}
+                })
+                    .done(function(d) {
+                        if(d.error==false) {
+                            var tmp_switch = maintenance_switch;
+                            if (maintenance_switch == 'auto' &&  maintenance_from == 'down_tran') {
+                                maintenance_switch = 'hand';
+                            }
+                            getccl(tmp_fr_gameto);
+                            getccl(tmp_fr_gamefrom);
+                            if (tmp_switch == 'auto' && maintenance_from == 'down_tran') {
+                                maintenance_switch = 'auto';
+                            }
+                            alert_box("转帐成功",'true','false');
+                        } else {
+                            alert_box(d.msg,'true','false');
+                        }
+
+
+                    })
+            }
+
+            name_arr=[];
+            name_arr['0']='【中心钱包】';
+            name_arr['bbin']='【BB波音平台】';
+            name_arr['ag_ag']='【AG环亚平台】';
+            name_arr['mg']='【MG摩卡平台】';
+            name_arr['avia']='【OG東方平台】';
+            name_arr['pteurope']='【PT电子】';
+            name_arr['hb']='【HB电子】';
+            name_arr['nt']='【NT电子】';
+            name_arr['allbet']='【AllBet欧博平台】';
+            name_arr['inteplay']='【INTEPLAY电子】';
+            name_arr['gg']='【GG捕鱼】';
+            name_arr['qt']='【QT电子】';
+            name_arr['ibc']='【IBC沙巴】';
+            name_arr['ttg']='【TTG电子】';
+            maintenance_from = '';
+            tmp_maintenance_status = '';
+            $(".go_tsfBtn").attr('disabled', false);
+        });
+    });
+
+    var maintenance_switch = 'hand';
+    var maintenance_from = '';
+
+    function getccl(com){
+        if (maintenance_switch == 'hand') {
+            maintenance(com);
+        }
+        var tmp_status = $('#'+com+'_ccl').attr('data-status');
+        if (tmp_status == 'working' || maintenance_switch == 'hand' ) {
+            $.ajax({
+                url: '../ty/u_transfer-ajax?com='+com,
+                type: 'POST',
+                dataType: 'json',
+                data : {com :com}
+            })
+                .done(function(d) {
+                    if (com == 'main') {
+                        $("#"+com+"_ccl").text(d.total);
+                    }else{
+                        if (tmp_status != 'working') {
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("维护中");
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').css("color","#ff932b");
+                        }else if(parseInt(d.total)>=0){
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text(d.total);
+                        }else{
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("系统异常");
+                        }
+                        $("#"+com+"_ccl").parent().find('i').removeClass('fa-spin');
+                    }
+                })
+                .fail(function() {
+                    console.log("fail");
+                })
+        }else{
+            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("维护中");
+            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').css("color","#ff932b");
+            $("#"+com+"_ccl").parent().find('i').removeClass('fa-spin');
+        }
+    }
+
+    var  tmp_maintenance_status = '';//用来存下方转帐判断有无维护用
+
+    function maintenance(com){
+        $.ajax({
+            url: 'api/function/maintenance.php',
+            type: 'POST',
+            dataType: 'json',
+            async:false,
+            data: {com: com}
+        })
+            .done(function(d) {
+                if ( com  == 'all') {//我的 => 转帐
+                    $.each(d.data, function(index, val) {
+                        $.each(val, function(s_index, s_val) {
+                            $('#'+s_index+'_ccl').attr('data-status', s_val);
+                        });
+                    });
+                }else{//用来存下方转帐判断有无维护用
+                    if (d.success == true) {
+                        tmp_maintenance_status = 'success';
+                    }else{
+                        tmp_maintenance_status = 'fail';
+                    }
+                }
+
+            })
+    }
+
+    function window_open(url){
+        wdth = $(window).width();
+        height = $(window).height();
+        window.open(url,'blank','width='+wdth,'height='+height);
+
+    }
+
+</script>
+
+<script type="text/javascript" src="js/index.js"></script>
+
+
+<!-- app open -->
+<script src="https://static.ydbimg.com/API/YdbOnline.js"></script>
+<script>
+    function openbrowser(url){
+        var YDB = new YDBOBJ();
+        YDB.OpenWithSafari(url);
+        console.log(url);
+    }
+    $(document).on('click', '.app_open', function(event) {
+        var tmp_url = $(this).attr('data-href');
+        $.get(tmp_url, function(data) {
+            // console.log(data);
+            openbrowser(data);
+        });
+        event.preventDefault();
+    });
+    $(document).on('click', '.app_open_bb', function(event) {
+        var tmp_url = $(this).attr('data-href');
+        $.get(tmp_url, function(data) {
+            tmp = data.replace(/\"/g,"'");
+            tmp = btoa(tmp);
+            tmp = tmp.replace(/\+/g,"_");
+            // console.log(tmp);
+            var data_url = location.protocol+"//vip77765.com/tymobile_new/redirect.php?u="+tmp;
+            openbrowser(data_url);
+        });
+        event.preventDefault();
+    });
+    //cnzz
+    var cz = document.createElement("script");
+    cz.src = "//s11.cnzz.com/z_stat.php?id=1261102673&web_id=1261102673";
+    document.getElementsByTagName('body')[0].appendChild(cz);
+
+    function reset_wallet(){
+        $("#walletin,#walletout").html("");
+        $.each(plate_arr, function(index, val) {
+            if (index==0) {
+                $("#walletin").append(val);
+            }else{
+                $("#walletout,#walletin").append(val);
+            }
+        });
+    }
+
+</script>
+<!-- app open -->
+
+
+
+</body></html>

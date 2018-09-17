@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <title>添运国际手机版</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+    <meta name="HandheldFriendly" content="true">
+
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="shortcut icon" href="images/favicon.png">
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css?v3">
+    <link type="text/css" rel="stylesheet" href="css/page.css?v9">
+    <link type="text/css" rel="stylesheet" href="css/user.css?v4">
+    <link type="text/css" rel="stylesheet" href="css/main.css?v1">
+
+    <script src="js/jquery-1.8.3.min.js"></script><!-- 1.8.3 -->
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.lazyload.min.js"></script><!-- 延时载入 -->
+    <script src="js/tabs.js"></script><!-- tabs -->
+    <!--   <script src="js/socket.io.js?v1"></script> -->
+    <script type="text/javascript">
+        // function alert_box(message, showbutton = 'true', confirm = 'false'){//show确定、取消按钮
+        function alert_box(message, showbutton, confirm ){//show确定、取消按钮
+            if (showbutton == 'false') {
+                $('#pop_button_check').css('display','none');
+                $('#pop_button_cancel_x').css('display','none');
+            }else{
+                $("#pop_button_check").css('display','');
+                $('#pop_button_cancel_x').css('display','');
+            }
+            if (showbutton == 'true' && confirm == 'true') {
+                $("#pop_button_cancel").css('display','');
+            }else{
+                $("#pop_button_cancel").css('display','none');
+            }
+            $(".pop_bg , .Pop-up").fadeIn('350');
+            setTimeout(function(){ $('#pop_text').html(message); }, 300);
+        }
+        $(function(){
+            var page_name = location.pathname;
+            if(page_name == "/tymobile_new/user.php"){
+                $(".back").hide();
+            }
+        });
+
+        //socket detect
+        var device = "phone";
+
+    </script></head>
+
+
+
+<body>
+
+<header class="top_login">
+    <div class="back" onclick="history.back();"><i class="fa fa-chevron-left"></i>返回</div>
+    <div class="logo" onclick="javascript:void(0);location.href='user.php'"></div>
+    <div class="top_right">
+        <i class="fa fa-database"></i>
+        <p id="main_ccl">0.00</p>
+    </div>
+</header>
+
+
+﻿
+<style>
+    .arrowup {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #000;
+    }
+    .arrowdown {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #000;
+    }
+    .detailMg{text-align:left;margin:0% 0% 0% 10%;line-height:20px; }
+    .detail{text-align:left;margin:0% 0% 0% 20%;line-height:20px; }
+</style>
+
+<a href="javascript:" id="go_top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a><!-- 返回顶端 -->
+<main class="main user">
+    <form name="form" action="" method="POST" id="action_forms">
+        <ul class="iptul">
+            <li>
+                <h3>开始日期:</h3><input id="datestart" name="datestart" min="2018-07-02" type="datetime-local" class="enter_ac record_ipt" value="2018-07-09T00:00" required="" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                <!-- <b id="datestart2"><i class="fa fa-table"></i></b> -->
+            </li>
+            <li>
+                <h3>结束日期:</h3><input id="dateend" name="dateend" min="2018-07-02" type="datetime-local" class="enter_ac record_ipt" value="2018-07-09T23:59" required="" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                <!-- <b id="dateend2"><i class="fa fa-table"></i></b> -->
+            </li>
+            <li>
+                <div class="sbtn full">
+                    <div class="btn" onclick="get_datefrom_to('2018-07-09T00:00','2018-07-09T23:59')">今日</div>
+                    <div class="btn" onclick="get_datefrom_to('2018-07-08T00:00','2018-07-08T23:59')">昨日</div>
+                    <div class="btn" onclick="get_datefrom_to('2018-07-02T00:00','2018-07-09T23:59')">近一周</div>
+                    <div class="btn" onclick="get_datefrom_to('2018-07-01T00:00','2018-07-09T23:59')">本月</div>
+                </div>
+            </li>
+            <button type="button" onclick="bet_history_log();">查询</button>
+        </ul>
+    </form>
+    <table width="100%" border="0" id="total_table" class="table_record">
+        <thead>
+        <tr>
+            <th>遊戲</th>
+            <th>注單數</th>
+            <th>投注額</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div id="microgaming_table_col" class="table_col" style="display: none;">
+        <div id="microgaming_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+        <table width="100%" border="0" class="table_record dataTable" id="microgaming_table">
+            <thead>
+            <tr>
+                <th id="microgaming_table_col_title"></th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+            </tbody>
+        </table>
+    </div><div id="microgaming_egame_table_col" class="table_col" style="display: none;">
+    <div id="microgaming_egame_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="microgaming_egame_table">
+        <thead>
+        <tr>
+            <th id="microgaming_egame_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="avia_oriental_table_col" class="table_col" style="display: none;">
+    <div id="avia_oriental_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="avia_oriental_table">
+        <thead>
+        <tr>
+            <th id="avia_oriental_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="ag_ag_table_col" class="table_col" style="display: none;">
+    <div id="ag_ag_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="ag_ag_table">
+        <thead>
+        <tr>
+            <th id="ag_ag_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="bbin_table_col" class="table_col" style="display: none;">
+    <div id="bbin_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="bbin_table">
+        <thead>
+        <tr>
+            <th id="bbin_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="bbin_egame_table_col" class="table_col" style="display: none;">
+    <div id="bbin_egame_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="bbin_egame_table">
+        <thead>
+        <tr>
+            <th id="bbin_egame_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="bbin_ft_table_col" class="table_col" style="display: none;">
+    <div id="bbin_ft_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="bbin_ft_table">
+        <thead>
+        <tr>
+            <th id="bbin_ft_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="bbin_ilotto_table_col" class="table_col" style="display: none;">
+    <div id="bbin_ilotto_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="bbin_ilotto_table">
+        <thead>
+        <tr>
+            <th id="bbin_ilotto_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="bbin_3d_table_col" class="table_col" style="display: none;">
+    <div id="bbin_3d_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="bbin_3d_table">
+        <thead>
+        <tr>
+            <th id="bbin_3d_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="hb_table_col" class="table_col" style="display: none;">
+    <div id="hb_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="hb_table">
+        <thead>
+        <tr>
+            <th id="hb_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="nt_table_col" class="table_col" style="display: none;">
+    <div id="nt_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="nt_table">
+        <thead>
+        <tr>
+            <th id="nt_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="allbet_table_col" class="table_col" style="display: none;">
+    <div id="allbet_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="allbet_table">
+        <thead>
+        <tr>
+            <th id="allbet_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="pteurope_table_col" class="table_col" style="display: none;">
+    <div id="pteurope_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="pteurope_table">
+        <thead>
+        <tr>
+            <th id="pteurope_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="inteplay_table_col" class="table_col" style="display: none;">
+    <div id="inteplay_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="inteplay_table">
+        <thead>
+        <tr>
+            <th id="inteplay_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="gg_table_col" class="table_col" style="display: none;">
+    <div id="gg_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="gg_table">
+        <thead>
+        <tr>
+            <th id="gg_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="ibc_table_col" class="table_col" style="display: none;">
+    <div id="ibc_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="ibc_table">
+        <thead>
+        <tr>
+            <th id="ibc_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="qt_table_col" class="table_col" style="display: none;">
+    <div id="qt_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="qt_table">
+        <thead>
+        <tr>
+            <th id="qt_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="sing_table_col" class="table_col" style="display: none;">
+    <div id="sing_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="sing_table">
+        <thead>
+        <tr>
+            <th id="sing_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="ttg_table_col" class="table_col" style="display: none;">
+    <div id="ttg_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="ttg_table">
+        <thead>
+        <tr>
+            <th id="ttg_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="gc_table_col" class="table_col" style="display: none;">
+    <div id="gc_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="gc_table">
+        <thead>
+        <tr>
+            <th id="gc_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="gc_gift_table_col" class="table_col" style="display: none;">
+    <div id="gc_gift_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="gc_gift_table">
+        <thead>
+        <tr>
+            <th id="gc_gift_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="gc_realegame_table_col" class="table_col" style="display: none;">
+    <div id="gc_realegame_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="gc_realegame_table">
+        <thead>
+        <tr>
+            <th id="gc_realegame_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="ag_egame_table_col" class="table_col" style="display: none;">
+    <div id="ag_egame_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="ag_egame_table">
+        <thead>
+        <tr>
+            <th id="ag_egame_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="kg_table_col" class="table_col" style="display: none;">
+    <div id="kg_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="kg_table">
+        <thead>
+        <tr>
+            <th id="kg_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="vr_table_col" class="table_col" style="display: none;">
+    <div id="vr_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="vr_table">
+        <thead>
+        <tr>
+            <th id="vr_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div><div id="microgaming_egame_table_col" class="table_col" style="display: none;">
+    <div id="microgaming_egame_triangle" class="arrowdown" style="position:absolute;z-index:1;margin-top:16px"></div>
+    <table width="100%" border="0" class="table_record dataTable" id="microgaming_egame_table">
+        <thead>
+        <tr>
+            <th id="microgaming_egame_table_col_title"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div>
+</main>
+
+<script>
+
+    $(function(){
+        $(document).on("click", "#datestart,#dateend", function(){
+            var id=$(this).attr("id").slice(0,-1);
+            $("#"+id).focus();
+        });
+        $('.table_col').hide();
+    });
+
+    function get_datefrom_to(datef, datet){
+        document.form.datestart.value = datef;
+        document.form.dateend.value = datet;
+    }
+
+    var game_caps = {"microgaming":"MG\u3010\u771f\u4eba-\u91d1\u6c99\u5385\u3011","avia_oriental":"OG\u3010\u771f\u4eba-\u82f1\u7687\u5385\u3011","ag_ag":"AG\u3010\u771f\u4eba-\u6c38\u5229\u5385\u3011","bbin":"BB\u3010\u771f\u4eba-\u94f6\u6cb3\u5385\u3011","bbin_egame":"BB\u3010\u6ce2\u97f3\u7535\u5b50\u3011","bbin_ft":"BB\u3010\u6ce2\u97f3\u4f53\u80b2\u3011","bbin_ilotto":"BB\u3010\u6ce2\u97f3\u5f69\u7968\u3011","bbin_3d":"BB\u3010\u6ce2\u97f33D\u3011","hb":"HB\u3010\u54c8\u5427\u7eb3\u7535\u5b50\u3011","nt":"NT\u3010NT\u7535\u5b50\u3011","allbet":"ALLBET\u3010\u771f\u4eba-\u6b27\u535a\u3011","pteurope":"PT\u3010PT\u7535\u5b50\u3011","inteplay":"WG\u3010WG\u7535\u5b50\u3011","gg":"GG\u3010GG\u6355\u9c7c\u3011","ibc":"IBC\u3010\u6c99\u5df4\u4f53\u80b2\u3011","qt":"QT\u3010QT\u7535\u5b50\u3011","sing":"3S\u3010\u7687\u51a0\u4f53\u80b2\u3011","ttg":"TTG\u3010TTG\u7535\u5b50\u3011","gc":"GC\u3010\u751c\u5fc3\u4e3b\u64ad\u3011","gc_gift":"GC\u3010\u751c\u5fc3\u793c\u7269\u3011","gc_realegame":"GC\u3010\u751c\u5fc3\u771f\u4eba\u3011","ag_egame":"AG\u3010\u73af\u4e9a\u7535\u5b50\u3011","kg":"KG\u3010\u5f00\u5143\u68cb\u724c\u3011","vr":"VR\u3010VR\u5f69\u7968\u3011","microgaming_egame":"MG\u3010\u6469\u5361\u7535\u5b50\u3011"};
+    function bet_history_log(){
+        $(".tbody").html("");
+        var mesg ='';
+        var starttime = $("#datestart").val();
+        var endtime = $("#dateend").val();
+        start = starttime.replace(/T/g," ");
+        end = endtime.replace(/T/g," ");
+
+
+        //if(starttime.length == 10 && endtime.length == 10){
+        if (starttime <= endtime){
+            var valid = true;
+        }
+        else{
+            var valid = false;
+            alert_box("起始日期不能大于结束日期!",'true','false');
+        }
+        //}
+        // else{
+        //     var valid = false;
+        //     alert_box("有日期格式错误!",'true','false');
+        //     alert_box("格式：xxxx（年）-xx（月）-xx（日）",'true','false');
+        // }
+
+        $('#total_table tbody').html('');
+        if(valid){
+            $.ajax({
+                url: "../ty/u_betting-record-ajax",
+                data: {datestart:start,dateend:end,source:'phone'},
+                type: "POST",
+                async: false,
+                dataType:"json",
+                success: function( d ){
+                    if (d.total!=null){
+                        var type_html='';
+                        $.each(d.total, function(type, type_val){
+                            type_html ='<tr> ' +
+                                '<td>' + game_caps[type] + '</td>' +
+                                '<td>' + type_val['wagers'] + '</td>' +
+                                '<td>' + type_val['totalstake'] + '</td>' +
+                                '</tr>'+ type_html;
+
+                            var html='';
+                            var count=type_val['wagers'];
+                            $.each(d[type], function(i, val){
+                                if(type=='microgaming' || type=='microgaming_egame'){
+                                    var dateStr = val['date'];
+                                    html =
+                                        '<hr>'+
+                                        '<ul>'+
+                                        '<li>' +
+                                        '<h3>第' + count +'笔 :</h3>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>时间:&nbsp;</h3>' +
+                                        '<h4>' + dateStr.substr(0, 10)+ ' 至 ' + dateStr.substr(15, 10) + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>单号:&nbsp;</h3>' +
+                                        '<h4>' + val['betno'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>项目:&nbsp;</h3>' +
+                                        '<h4>' + val['betType'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>金额:&nbsp;</h3>' +
+                                        '<h4>' + val['stake'] + '</h4>' +
+                                        '</li>'+
+                                        '</ul>'+html;
+                                    count--;
+                                }else if(type=='ibc'){
+                                    html =
+                                        '<hr>' +
+                                        '<ul>' +
+                                        '<li>' +
+                                        '<h3>第' + count + '笔 :</h3>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>时间:&nbsp;</h3>' +
+                                        '<h4>' + val['date'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>单号:&nbsp;</h3>' +
+                                        '<h4>' + val['betno'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>项目:&nbsp;</h3>' +
+                                        '<h4>' + val['betType'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>金额:&nbsp;</h3>' +
+                                        '<h4>' + val['stake'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>体育种类:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][1] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>下注类型:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][2] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>主队最后得分:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][3] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>客队最后得分:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][4] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>联盟识别码:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][5] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>注单状态:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][6] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>注单赔率:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][7] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>赔率类型:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][8] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>下注后的馀额:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][9] + '</h4>' +
+                                        '</li>'+
+                                        '</ul>' + html;
+                                    count--;
+
+                                }else if(type=='sing'){
+                                    html =
+                                        '<hr>' +
+                                        '<ul>' +
+                                        '<li>' +
+                                        '<h3>第' + count + '笔 :</h3>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>时间:&nbsp;</h3>' +
+                                        '<h4>' + val['date'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>单号:&nbsp;</h3>' +
+                                        '<h4>' + val['betno'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>项目:&nbsp;</h3>' +
+                                        '<h4>' + val['betType'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>金额:&nbsp;</h3>' +
+                                        '<h4>' + val['stake'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>游戏名称:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][1] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>赌注项目:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][2] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>赛事编号:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][3] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>赌注项目方式:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][4] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>赔率种类:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][5] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>下注赔率:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][6] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>下注金额 (根据会员货币):&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][7] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>注单状态&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][8] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>玩法:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][9] + '</h4>' +
+                                        '</li>'+
+                                        '</ul>' + html;
+                                    count--;
+                                }else if(type=='bbin_ft'){
+                                    html =
+                                        '<hr>' +
+                                        '<ul>' +
+                                        '<li>' +
+                                        '<h3>第' + count + '笔 :</h3>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>时间:&nbsp;</h3>' +
+                                        '<h4>' + val['date'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>单号:&nbsp;</h3>' +
+                                        '<h4>' + val['betno'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>项目:&nbsp;</h3>' +
+                                        '<h4>' + val['betType'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>金额:&nbsp;</h3>' +
+                                        '<h4>' + val['stake'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>注單結果:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][1] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>派彩金額:&nbsp;</h3>' +
+                                        '<h4>' + val.detail[Object.keys(val.detail)[0]][2] + '</h4>' +
+                                        '</li>'+
+                                        '</ul>' + html;
+                                    count--;
+                                }
+                                else
+                                {
+                                    html =
+                                        '<hr>' +
+                                        '<ul>' +
+                                        '<li>' +
+                                        '<h3>第' + count + '笔 :</h3>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>时间:&nbsp;</h3>' +
+                                        '<h4>' + val['date'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>单号:&nbsp;</h3>' +
+                                        '<h4>' + val['betno'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>项目:&nbsp;</h3>' +
+                                        '<h4>' + val['betType'] + '</h4>' +
+                                        '</li>'+
+                                        '<li>' +
+                                        '<h3>金额:&nbsp;</h3>' +
+                                        '<h4>' + val['stake'] + '</h4>' +
+                                        '</li>'+
+                                        '</ul>' + html;
+                                    count--;
+
+                                }
+                            });
+                            //显示有下注记录的游戏
+                            $('#'+type+'_table tbody').append(html);
+                            $('#'+type+'_table_col').show();
+
+                            //详情的Title
+                            $('#'+type+'_table_col_title').html("");
+                            $('#'+type+'_table_col_title').append(game_caps[type]);
+                            $('#'+type+'_table_col').unbind();
+                            $('#'+type+'_table tbody').hide();
+                            $(document).on("click", '#'+type+'_table_col', function(){
+                                $('#'+type+'_table tbody').slideToggle();
+                                $('#'+type+'_triangle').toggleClass('arrowup');
+                                $('#'+type+'_triangle').toggleClass('arrowdown');
+                            });
+
+                        });
+                        $('#total_table tbody').append(type_html);
+                    }
+                    if(d.total == 0){
+                        $('#total_table tbody').append('<tr><td colspan="4"><div class="no_data">暂无任何记录！</div></td></tr>');
+                    }
+                    if(d.mesg!=null){
+                        mesg = d.mesg;
+                    }
+                },
+                error: function ( xhr, ajaxOptions, thrownError ){
+                    alert_box(thrownError,'true','false');
+                }
+            });
+        }
+    }
+</script>
+
+
+<!-- 底部导航 -->
+<footer>
+    <ul>
+        <li onclick="javascript:void(0);location.href='user.php'"><i class="fa fa-home"></i><p>首页</p></li>
+        <li onclick="javascript:void(0);location.href='user_deposit.php'"><i class="fa fa-credit-card"></i><p>充值</p></li>
+        <li onclick="cs()"><a class="cs_str" href="https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&amp;configID=49259&amp;jid=2028701177&amp;s=1&amp;lan=zh" target="_blank"><i class="fa fa-commenting"></i><p>客服</p></a></li>
+        <li onclick="javascript:void(0);location.href='user_myaccount.php'"><i class="fa fa-user-circle"></i><p>我的</p></li>
+    </ul>
+</footer>
+<div class="page_bg"></div>
+
+
+
+<!-- 弹窗 -->
+<div class="pop_bg"></div>
+<div id="all_pop"></div>
+<div class="Pop-up pop_close">
+    <div class="btn_close pop_cls close_event" id="pop_button_cancel_x"><i class="fa fa-times"></i></div>
+    <p id="pop_text">　　</p>
+    <button id="pop_button_check" value="cnfrm_yes" class="method_btn">确定</button>
+    <button id="pop_button_cancel" value="cnfrm_no" class="method_btn">取消</button>
+</div>
+<!-- 弹窗 -->
+
+<!-- 弹窗 -->
+<script>
+    $(".pop_bg , .close_event , .Pop-up button").on('click', function() {
+        // setTimeout(function(){ $('#pop_text').text('　　'); }, 300);
+        $(".pop_bg").fadeOut('350');
+        $(".pop_close").fadeOut('350');
+
+
+    });
+
+</script>
+<!-- 弹窗 -->
+
+<!-- cs -->
+<script>
+    $(function(){
+        cs();//第一次cs聯絡資訊
+        agent();
+    })
+    function cs(){
+        var cs_str = "https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&configID=49259&jid=2028701177&s=1&lan=zh";
+        $('.cs_str').attr({
+            href: cs_str,
+            target: '_blank'
+        });
+    }
+    function agent(){
+        var agent_str = "https://ty7776.com/agent/";
+        $('.agent_str').attr({
+            href: agent_str,
+            target: '_blank'
+        });;
+    }
+</script>
+<!-- cs -->
+
+<!-- 頁面切換 -->
+<script type="text/javascript">
+
+    function load_page(page_name){
+        $(window).scrollLeft("0");
+        $(window).scrollTop("0");
+        $(".main").load(page_name);
+        $.ajax({
+            url: '../../ty/station_msg_ajax.php',
+            type: 'POST',
+            dataType: 'json',
+            async:false,
+            data: {
+                from: 'mobile_find',
+                id: '337451',
+            },
+        })
+            .done(function(d) {
+                console.log(d.msg);
+                if (d.msg == 'is_read') {
+                    $('.station').removeClass('fa-info-circle');
+                }else if (d.msg == 'not_read') {
+                    $('.station').addClass('fa-info-circle');
+                }
+                console.log("success");
+            })
+            .fail(function() {
+                console.log("error");
+            });
+
+    }
+</script>
+
+<!-- 登入注册tab -->
+<script>
+    $(function() {
+        $(document).on("click", '#logout', function(){
+            $.ajax({
+                url: 'api/function/check.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {type:'logout'}
+            })
+                .done(function() {
+                    console.log("success");
+                    location.href='./index.php'
+                })
+                .fail(function() {
+                    console.log("error logout");
+                })
+        });
+
+        $.ajax({
+            url: '../ty/u_transfer-ajax?com=main',
+            type: 'POST',
+            dataType: 'json',
+            data : {com : "main"}
+        })
+            .done(function(d) {
+                if(parseInt(d.total)>=0) {
+                    $("#main_ccl").text(d.total)
+                } else {
+                    $("#main_ccl").text("00.0")
+                }
+            })
+
+        $(document).on("click", '.go_tsfBtn', function(){
+            maintenance_from = 'down_tran';
+            $(".go_tsfBtn").attr('disabled','disabled');
+            var ein = document.getElementById("walletin");
+            var comin = ein.options[ein.selectedIndex].value;
+            var eout = document.getElementById("walletout");
+            var comout = eout.options[eout.selectedIndex].value;
+            var fr_transfer_amt=$("#fr_transfer_amt").val();
+            var tmp_fr_gamefrom=comin;
+            var tmp_fr_gameto=comout;
+
+            if( comin=='0') {
+                tmp_fr_gamefrom='main';
+            }
+            if( comout=='0') {
+                tmp_fr_gameto='main';
+            }
+
+            maintenance(tmp_fr_gamefrom);
+            maintenance_status_from = tmp_maintenance_status;
+            maintenance(tmp_fr_gameto);
+            maintenance_status_to   = tmp_maintenance_status;
+
+            if (maintenance_status_from == 'fail' || maintenance_status_to == 'fail') {
+                var tmp_m_str = '';
+                if (maintenance_status_from == 'fail') {
+                    tmp_m_str = tmp_fr_gamefrom;
+                }else{
+                    tmp_m_str = tmp_fr_gameto;
+                }
+
+                alert_box(tmp_m_str + '平台維護中','true','false');
+
+            } else if ( tmp_fr_gamefrom == tmp_fr_gameto) {
+                alert_box('请选择不同的平台转帐','true','false');
+
+            }else{
+
+                $.ajax({
+                    url: '../ty/u_transfer-action',
+                    type: 'POST',
+                    dataType: 'json',
+                    async : false,
+                    data: {
+                        fr_transfer_type : 'transfer',
+                        fr_gamefrom : comin,
+                        fr_gameto : comout,
+                        fr_transfer_amt : fr_transfer_amt}
+                })
+                    .done(function(d) {
+                        if(d.error==false) {
+                            var tmp_switch = maintenance_switch;
+                            if (maintenance_switch == 'auto' &&  maintenance_from == 'down_tran') {
+                                maintenance_switch = 'hand';
+                            }
+                            getccl(tmp_fr_gameto);
+                            getccl(tmp_fr_gamefrom);
+                            if (tmp_switch == 'auto' && maintenance_from == 'down_tran') {
+                                maintenance_switch = 'auto';
+                            }
+                            alert_box("转帐成功",'true','false');
+                        } else {
+                            alert_box(d.msg,'true','false');
+                        }
+
+
+                    })
+            }
+
+            name_arr=[];
+            name_arr['0']='【中心钱包】';
+            name_arr['bbin']='【BB波音平台】';
+            name_arr['ag_ag']='【AG环亚平台】';
+            name_arr['mg']='【MG摩卡平台】';
+            name_arr['avia']='【OG東方平台】';
+            name_arr['pteurope']='【PT电子】';
+            name_arr['hb']='【HB电子】';
+            name_arr['nt']='【NT电子】';
+            name_arr['allbet']='【AllBet欧博平台】';
+            name_arr['inteplay']='【INTEPLAY电子】';
+            name_arr['gg']='【GG捕鱼】';
+            name_arr['qt']='【QT电子】';
+            name_arr['ibc']='【IBC沙巴】';
+            name_arr['ttg']='【TTG电子】';
+            maintenance_from = '';
+            tmp_maintenance_status = '';
+            $(".go_tsfBtn").attr('disabled', false);
+        });
+    });
+
+    var maintenance_switch = 'hand';
+    var maintenance_from = '';
+
+    function getccl(com){
+        if (maintenance_switch == 'hand') {
+            maintenance(com);
+        }
+        var tmp_status = $('#'+com+'_ccl').attr('data-status');
+        if (tmp_status == 'working' || maintenance_switch == 'hand' ) {
+            $.ajax({
+                url: '../ty/u_transfer-ajax?com='+com,
+                type: 'POST',
+                dataType: 'json',
+                data : {com :com}
+            })
+                .done(function(d) {
+                    if (com == 'main') {
+                        $("#"+com+"_ccl").text(d.total);
+                    }else{
+                        if (tmp_status != 'working') {
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("维护中");
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').css("color","#ff932b");
+                        }else if(parseInt(d.total)>=0){
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text(d.total);
+                        }else{
+                            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("系统异常");
+                        }
+                        $("#"+com+"_ccl").parent().find('i').removeClass('fa-spin');
+                    }
+                })
+                .fail(function() {
+                    console.log("fail");
+                })
+        }else{
+            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').text("维护中");
+            $("#"+com+"_ccl").parents('div.plateform_re').next('h6').css("color","#ff932b");
+            $("#"+com+"_ccl").parent().find('i').removeClass('fa-spin');
+        }
+    }
+
+    var  tmp_maintenance_status = '';//用来存下方转帐判断有无维护用
+
+    function maintenance(com){
+        $.ajax({
+            url: 'api/function/maintenance.php',
+            type: 'POST',
+            dataType: 'json',
+            async:false,
+            data: {com: com}
+        })
+            .done(function(d) {
+                if ( com  == 'all') {//我的 => 转帐
+                    $.each(d.data, function(index, val) {
+                        $.each(val, function(s_index, s_val) {
+                            $('#'+s_index+'_ccl').attr('data-status', s_val);
+                        });
+                    });
+                }else{//用来存下方转帐判断有无维护用
+                    if (d.success == true) {
+                        tmp_maintenance_status = 'success';
+                    }else{
+                        tmp_maintenance_status = 'fail';
+                    }
+                }
+
+            })
+    }
+
+    function window_open(url){
+        wdth = $(window).width();
+        height = $(window).height();
+        window.open(url,'blank','width='+wdth,'height='+height);
+
+    }
+
+</script>
+
+<script type="text/javascript" src="js/index.js"></script>
+
+
+<!-- app open -->
+<script src="https://static.ydbimg.com/API/YdbOnline.js"></script>
+<script>
+    function openbrowser(url){
+        var YDB = new YDBOBJ();
+        YDB.OpenWithSafari(url);
+        console.log(url);
+    }
+    $(document).on('click', '.app_open', function(event) {
+        var tmp_url = $(this).attr('data-href');
+        $.get(tmp_url, function(data) {
+            // console.log(data);
+            openbrowser(data);
+        });
+        event.preventDefault();
+    });
+    $(document).on('click', '.app_open_bb', function(event) {
+        var tmp_url = $(this).attr('data-href');
+        $.get(tmp_url, function(data) {
+            tmp = data.replace(/\"/g,"'");
+            tmp = btoa(tmp);
+            tmp = tmp.replace(/\+/g,"_");
+            // console.log(tmp);
+            var data_url = location.protocol+"//vip77765.com/tymobile_new/redirect.php?u="+tmp;
+            openbrowser(data_url);
+        });
+        event.preventDefault();
+    });
+    //cnzz
+    var cz = document.createElement("script");
+    cz.src = "//s11.cnzz.com/z_stat.php?id=1261102673&web_id=1261102673";
+    document.getElementsByTagName('body')[0].appendChild(cz);
+
+    function reset_wallet(){
+        $("#walletin,#walletout").html("");
+        $.each(plate_arr, function(index, val) {
+            if (index==0) {
+                $("#walletin").append(val);
+            }else{
+                $("#walletout,#walletin").append(val);
+            }
+        });
+    }
+
+</script>
+<!-- app open -->
+
+
+
+</body></html>

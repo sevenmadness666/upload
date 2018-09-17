@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <title>添运国际手机版</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+    <meta name="HandheldFriendly" content="true">
+
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="shortcut icon" href="images/favicon.png">
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css?v3">
+    <link type="text/css" rel="stylesheet" href="css/page.css?v9">
+    <link type="text/css" rel="stylesheet" href="css/user.css">
+    <link type="text/css" rel="stylesheet" href="css/main.css?v1">
+
+    <script src="js/jquery-1.8.3.min.js"></script><!-- 1.8.3 -->
+    <script src="js/jquery.cookie.js"></script><!-- 1.8.3 -->
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.lazyload.min.js"></script><!-- 延时载入 -->
+    <script src="js/tabs.js"></script><!-- tabs -->
+</head>
+
+<body>
+<script>
+    $(function(){
+        var a = location.pathname;
+        if(a == "/tymobile_new/index.php" || a == "/tymobile_new/"){
+            $(".back").hide();
+        }
+    })
+</script>
+<header>
+    <div class="back" onclick="history.back();"><i class="fa fa-chevron-left"></i>返回</div>
+    <div class="logo" onclick="javascript:void(0);location.href='index.php'"></div>
+    <div class="top_right" onclick="javascript:void(0);location.href='login.php'">
+        <i class="fa fa-user-o"></i>
+        <p>登入/注册</p>
+    </div>
+</header>
+
+<main class="main">
+
+    <div class="login_reg">
+        <div class="tab" id="tab_mob">
+            <div class="tab-nav_counter j-tab-nav_mob tab_btn2">
+                <a class="current" href="javascript:void(0);">登入</a>
+                <a href="javascript:void(0);">手机登入</a>
+
+                <!--         <a href="javascript:void(0);">注册</a>
+                        <a href="javascript:void(0);">手机注册</a> -->
+            </div>
+            <div class="tab-con_counter">
+                <div class="j-tab-con_mob">
+
+                    <!-- 登入 -->
+                    <div class="tab-con-item" style="display:block;">
+                        <h4>请先登入您的会员帐号</h4>
+                        <div class="ipttit"><i class="fa fa-user-circle"></i></div>
+                        <input placeholder="您的会员帐号" id="u" class="member_login">
+                        <div class="ipttit"><i class="fa fa-unlock-alt"></i></div>
+                        <input placeholder="您的密码" type="password" id="p" class="member_login">
+                        <a href="javascript:void(0)"><button id="send" style="margin: 0 0 6px 0;">登入</button></a>
+                        <a href="reg.php?type=1"><button>注册</button></a>
+                        <a class="forgot_psw" href="forgot_psw.php"><p>忘记密码?</p></a>
+                    </div>
+
+                    <!-- 手机登入 -->
+                    <div class="tab-con-item">
+                        <h4>输入您的手机号</h4>
+                        <div class="ipttit"><i class="fa fa-mobile"></i></div>
+                        <input id="phonenumber" placeholder="输入手机号">
+                        <div class="ipttit"><i class="fa fa-unlock-alt"></i></div>
+                        <input placeholder="您的密码" id="phonepassword" type="password" class="member_login">
+
+                        <div class="squaredFour">
+                            <input type="checkbox" id="RMphone">
+                            <label for="RMphone">
+                            </label>
+                            <h3>记住手机号</h3>
+                        </div>
+                        <button id="phone_login" style="margin: 0 0 6px 0" ;="">登入</button>
+                        <a href="reg.php?type=2"><button>手机注册</button></a>
+
+                    </div>
+
+                    <!-- 注册 -->
+                    <!--           <div class="tab-con-item tab_reg1">
+                                  <div class="ipttit"><b>*</b>帐号</div>
+                                  <input id="username" placeholder="6-12个字符,英文需小写" minlength="6" maxlength="12">
+                                  <div class="ipttit"><b>*</b>密码</div>
+                                  <input id="password" placeholder="8-16个字符长度字母或数字组成" type="password" minlength="8" maxlength="16">
+                                  <div class="ipttit"><b>*</b>确认密码</div>
+                                  <input id="confirmpassword" placeholder="重新输入密码" type="password" minlength="8" maxlength="16">
+                                  <div class="ipttit"><b>*</b>手机号</div>
+                                  <input id="mobileno" placeholder="手机号码(必填)">
+                                  <div class="ipttit">介绍码</div>
+                                  <input id="intro" placeholder="输入介绍码">
+                                  <div class="ipttit"><b>*</b>邮箱</div>
+                                  <input id="email" onblur="lowerCase();" placeholder="邮箱格式：xxx@xxx.com (找回密码用)">
+                                  <div class="ipttit"><b>*</b>验证码</div>
+                                  <input id="checkcode" placeholder="輸入验证码" maxlength="4"><img id="img_check" src="../captcha/code.php" width="94px" height="38px" style="margin: 0 0 -14px -95px;cursor: pointer;">
+
+                                  <div class="squaredFour">
+                                      <input type="checkbox" id="squaredFour">
+                                      <label for="squaredFour"></label>
+                                    <h3>同意本站
+                                      <a href="javascript:" onclick="window.open('../ty/info_article.php','','width=750 height=500 resizable=yes scrollbars=yes top=20 left=400')"><span style="font-size: 12px; color: #acacac;">《协议条款》</span></a>
+                                    </h3>
+                                  </div>
+
+                                  <button id="reg" >注册</button>
+                                  <button onClick="reg_reset();">重置</button>
+                              </div> -->
+
+                    <!-- 手机注册 -->
+                    <!--           <div class="tab-con-item tab_reg2">
+                                  <div class="ipttit"><b>*</b>手机号</div>
+                                  <input id="reg_phone" placeholder="手机号码(必填)">
+                                  <div class="ipttit"><b>*</b>密码</div>
+                                  <input id="reg_password" placeholder="8-16个字符长度字母或数字组成" type="password" minlength="8" maxlength="16">
+                                  <div class="ipttit"><b>*</b>确认密码</div>
+                                  <input  placeholder="重新输入密码" type="password" minlength="8" maxlength="16">
+                                  <div class="ipttit"><i class="fa fa-shield"></i></div>
+                                  <input id="confirmcode" placeholder="输入验证码">
+                                  <button class="RMP_Btn" id="getcode">获取验证码</button>
+
+                                  <div class="squaredFour">
+                                      <input type="checkbox" id="test">
+                                      <label for="test"></label>
+                                    <h3>同意本站
+                                      <a href="javascript:" onclick="window.open('../ty/info_article.php','','width=750 height=500 resizable=yes scrollbars=yes top=20 left=400')"><span style="font-size: 12px; color: #acacac;">《协议条款》</span></a>
+                                    </h3>
+                                  </div>
+
+                                  <button id="phone_reg">注册</button>
+                                  <button onClick="reg_reset();">重置</button>
+                              </div> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- 登入注册tab -->
+<script type="text/javascript">
+    $("#tab_mob").rTabs_mob({
+        bind : 'click',
+        animation : 'fadein'
+    });
+
+    $(function(){
+        if ($.cookie("rmbUser") == "true") {
+            $("#phonenumber").val($.cookie("phonenumber"));//记录账号
+        }
+    })
+
+    $("#getcode").click(function(event) {
+        var mobile = $("#reg_phone").val();
+        $.ajax({
+            url: 'user_phoneloginsms.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {'fr_handphone': mobile},
+        })
+            .done(function(d) {
+                if(d.error==true){
+                    alert_box(d.error_msg,'true','false');
+                }else{
+                    //锁定手机号码
+                    $("#check_phone").attr('readonly','readonly');
+                    alert_box('认证码已发送，稍候请输入认证码','true','false');
+                }
+            });
+
+    });
+
+
+    // $("#phone_reg").click(function(event) {
+    //     var phone = $("#reg_phone").val();
+    //     var checkcode = $("#confirmcode").val();
+    //     var login_password = $("#reg_password").val();
+    //     if (phone==''){
+    //         alert_box("手机号不可为空");
+    //         return false;
+    //     }
+    //     if (login_password==''){
+    //         alert_box("密码不可为空");
+    //         return false;
+    //     }
+    //     if (checkcode==''){
+    //         alert_box("验证码不可为空");
+    //         return false;
+    //     }
+    //     $.ajax({
+    //         url: 'phone_ajax.php',
+    //         type: 'POST',
+    //         dataType: 'json',
+    //         data: {"type":"reg","phone": phone,"password":login_password,"code":checkcode},
+    //     })
+    //     .done(function(d) {
+    //         var username        = d.accountcode;
+    //         var password        = d.password;
+    //         var confirmPassword = d.conpassord;
+    //         var mobileno        = d.phone;
+    //         var intro           = "";
+    //         var email           = d.mail;
+    //         var code            = d.code;
+    //         if(username == "loginerror"){
+    //             alert_box(d.msg);
+    //         }else{
+    //             $.ajax({
+    //                 url: 'api/function/account_reg.php',
+    //                 type: 'POST',
+    //                 dataType: 'json',
+    //                 data: {
+    //                     username: username,
+    //                     password: password,
+    //                     confirmPassword : confirmPassword,
+    //                     mobileno:mobileno,
+    //                     intro:intro,
+    //                     code:code,
+    //                     email:email
+    //                 }
+    //             })
+    //             .done(function(d) {
+    //                 if(d.success==true) {
+    //                     alert_box(d.data);
+    //                     setTimeout(function(){
+    //                         $.ajax({
+    //                             url: 'api/function/check.php',
+    //                             type: 'POST',
+    //                             dataType: 'json',
+    //                             data: {username: username, password: password,type:'login'},
+    //                         })
+    //                         .done(function(d) {
+    //                             if(d.success==true){
+    //                                 window.location = "/tymobile_new/user.php#new";
+    //                             }
+    //                         })
+    //                     },500)
+    //                 } else {
+    //                     alert_box(d.msg);
+    //                 }
+    //             })
+    //         }
+    //     });
+    // });
+
+    $("#phone_login").click(function(event) {
+        vailRememberNickName();
+        var phone = $("#phonenumber").val();
+        var login_password = $("#phonepassword").val();
+        $.ajax({
+            url: 'phone_ajax.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {"type":"login","phone": phone,"password":login_password},
+        })
+            .done(function(d) {
+                if(d.account != "loginerror"){
+                    $.ajax({
+                        url: 'api/function/check.php',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {username: d.account, password: d.password,type:d.type},
+                    })
+                        .done(function(d) {
+                            if(d.success==true){
+                                window.location = "/tymobile_new/user.php";
+                            }else{
+                                alert_box(d.msg);
+                            }
+                        });
+                }else{
+                    alert_box(d.msg);
+                }
+            });
+    });
+
+    function vailRememberNickName(){
+        var check=$("#RMphone").prop("checked");
+        if(check==false){
+            var phonenumber = $("#phonenumber").val();
+            $.cookie("rmbUser", "true", { expires: 3 }); // 存储一个带3天期限的 cookie
+            $.cookie("phonenumber", phonenumber, { expires: 3 }); // 存储一个带3天期限的 cookie
+        }else {
+            $.cookie("rmbUser", "false", { expires: -1 });
+            $.cookie("phonenumber", '', { expires: -1 });
+        }
+    }
+</script>
+
+
+<!-- 底部导航 -->
+<footer>
+    <ul>
+        <li onclick="javascript:void(0);location.href='index.php'"><i class="fa fa-home"></i><p>首页</p></li>
+        <li onclick="javascript:void(0);location.href='login.php'"><i class="fa fa-credit-card"></i><p>充值</p></li>
+        <li onclick="cs()"><a class="cs_str" href="https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&amp;configID=49259&amp;jid=2028701177&amp;s=1&amp;lan=zh" target="_blank"><i class="fa fa-commenting"></i><p>客服</p></a></li>
+        <li onclick="javascript:void(0);location.href='login.php'"><i class="fa fa-user-circle"></i><p>我的</p></li>
+    </ul>
+</footer>
+<div class="page_bg"></div>
+
+
+
+<!-- 弹窗 -->
+<div class="pop_bg"></div>
+<div id="all_pop"></div>
+<div class="Pop-up pop_close">
+    <div class="btn_close pop_cls close_event"><i class="fa fa-times"></i></div>
+    <p id="pop_text">文字輸入框</p>
+    <button>确定</button>
+</div>
+
+<script type="text/javascript">
+
+    function alert_box(message){
+        $('#pop_text').text(message);
+        $('#all_pop').click();
+    }
+
+    $("#all_pop").on('click', function() {
+        $(".pop_bg , .Pop-up").fadeIn('350');
+    });
+    $(document).on("click", '.pop_bg , .close_event , .Pop-up button', function(){
+        $(".pop_bg").fadeOut('350');
+        $(".pop_close").fadeOut('350');
+    });
+</script>
+<!-- 弹窗 -->
+
+<script type="text/javascript" src="js/index.js"></script>
+
+<script>
+    $(document).on("click", '#img_check', function(){
+        $("#img_check").attr("src","../captcha/code.php");
+    });
+
+    $(function(){
+
+        $('.member_login').keypress(function(e) {
+            if(e.which == 13) {
+                $("#send").click();
+            }
+        });
+
+        $(document).on("click", '#send', function(){
+            var re = /^[a-zA-Z0-9]{6,12}$/;
+            if ($("#u").val() =='' || !re.test($("#u").val())){
+                alert_box("帐号格式错误");
+                return false;
+            }
+            $.ajax({
+                url: 'api/function/check.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {username: $("#u").val(), password: $("#p").val(),type:'login'},
+            })
+                .done(function(d) {
+                    if(d.success==true){
+                        window.location = "/tymobile_new/user.php";
+                    }else{
+                        alert_box(d.msg);
+                    }
+                })
+                .fail(function(d) {
+                    console.log('fail');
+                });
+        });
+    });
+
+    function lowerCase(){
+        $("#email").val($("#email").val().toLowerCase());
+    }
+
+    //重置表单
+    function reg_reset(){
+        $("input").attr("value","");
+    }
+    function setCookie(c_name,value,expiredays){
+        var exdate=new Date()
+        exdate.setDate(exdate.getDate()+expiredays)
+        document.cookie=c_name+ "=" +escape(value)+
+            ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+    }
+    function deleteAllCookies() {
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+    }
+    function cs(){
+        var cs_str = "https://chat6.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=697307&configID=49259&jid=2028701177&s=1&lan=zh";
+        //var cs_str = "http://webchat.b.qq.com/webchat.htm?sid=2188z8p8p8p8q8y8x8y8P";
+        $('.cs_str').attr({
+            href: cs_str,
+            target: '_blank'
+        });
+    }
+    function agent(){
+        var agent_str = "https://ty7776.com/agent/";
+        $('.agent_str').attr({
+            href: agent_str,
+            target: '_blank'
+        });;
+    }
+</script>
+<!-- app open -->
+<script src="https://static.ydbimg.com/API/YdbOnline.js"></script>
+<script>
+    function openbrowser(url){
+        var YDB = new YDBOBJ();
+        YDB.OpenWithSafari(url);
+    }
+</script>
+
+<script>
+    $(function(){
+        cs();//第一次cs聯絡資訊
+        agent();
+        $('.member_reg').keypress(function(e) {
+            if(e.which == 13) {
+                $("#reg").click();
+            }
+        });
+
+        $(document).on("click", '#reg', function(){
+            var username=$("#username").val();
+            var password=$("#password").val();
+            var confirmPassword=$("#confirmpassword").val();
+            var mobileno=$("#mobileno").val();
+            var intro=$("#intro").val();//介绍码
+            var email=$("#email").val();//邮箱
+            var code=$("#checkcode").val();//验证码
+            var checkcode=$("#checkcode").val();
+            var check=$("#squaredFour").prop("checked");
+
+            var re = /^[a-zA-Z0-9]{6,12}$/;
+            if (username =='' || !re.test(username)){
+                alert_box("帐号格式错误");
+                return false;
+            }
+
+            if(password.length<8 || password.length>16) {
+                alert_box("密码不能少于8个字或多于16个字");
+                return false;
+            }
+
+            if(password != confirmPassword) {
+                alert_box("密码与确认密码不同");
+                return false;
+            }
+            if(mobileno =='') {
+                alert_box("手机号码不可空缺！");
+                return false;
+            }
+            var re_n = /^[0-9]{11,13}$/;
+            if(!re_n.test(mobileno)) {
+                alert_box("手机号码格式错误");
+                return false;
+            }
+            var re_m = /^[0-9]{4}$/;
+            if(checkcode =='' || !re_m.test(checkcode)) {
+                alert_box("验证码错误");
+                return false;
+            }
+            if (email ==''){
+                alert_box("邮箱不可空缺");
+                return false;
+            }
+            var re_e = /^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[.]{1}[A-Za-z]{2,5}$/;   //EMAIL验证
+            if (!re_e.test(email)){
+                alert_box("email格式错误");
+                return false;
+            }
+
+
+            if(check==false) {
+                $.ajax({
+                    url: 'api/function/account_reg.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        username: username,
+                        password: password,
+                        confirmPassword : confirmPassword,
+                        mobileno:mobileno,
+                        intro:intro,
+                        code:code,
+                        email:email
+                    }
+                })
+                    .done(function(d) {
+                        if(d.success==true) {
+                            alert_box(d.data);
+                            setTimeout(function(){
+                                $.ajax({
+                                    url: 'api/function/check.php',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {username: username, password: password,type:'login'},
+                                })
+                                    .done(function(d) {
+                                        if(d.success==true){
+                                            window.location = "/tymobile_new/user.php#new";
+                                        }
+                                    })
+                            },500)
+                        } else {
+                            alert_box(d.msg);
+                        }
+                    })
+            } else {
+                alert_box("请同意本站的协议条款");
+            }
+        });
+    });
+</script>
+
+
+
+</body></html>
