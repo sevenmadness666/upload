@@ -1,33 +1,33 @@
-[debug] [2018-10-02T09:03:54.060Z] ----------------------------------------------------------------------
-[debug] [2018-10-02T09:03:54.062Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\windows 7\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy --only hosting
-[debug] [2018-10-02T09:03:54.062Z] CLI Version:   4.2.1
-[debug] [2018-10-02T09:03:54.062Z] Platform:      win32
-[debug] [2018-10-02T09:03:54.062Z] Node Version:  v8.12.0
-[debug] [2018-10-02T09:03:54.062Z] Time:          Tue Oct 02 2018 17:03:54 GMT+0800 (中国标准时间)
-[debug] [2018-10-02T09:03:54.062Z] ----------------------------------------------------------------------
+[debug] [2018-10-02T09:09:11.469Z] ----------------------------------------------------------------------
+[debug] [2018-10-02T09:09:11.471Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\windows 7\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy --only hosting
+[debug] [2018-10-02T09:09:11.471Z] CLI Version:   4.2.1
+[debug] [2018-10-02T09:09:11.471Z] Platform:      win32
+[debug] [2018-10-02T09:09:11.471Z] Node Version:  v8.12.0
+[debug] [2018-10-02T09:09:11.472Z] Time:          Tue Oct 02 2018 17:09:11 GMT+0800 (中国标准时间)
+[debug] [2018-10-02T09:09:11.472Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2018-10-02T09:03:54.069Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2018-10-02T09:03:54.070Z] > authorizing via signed-in user
-[debug] [2018-10-02T09:03:54.071Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2018-10-02T09:03:54.071Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+[debug] [2018-10-02T09:09:11.480Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-10-02T09:09:11.480Z] > authorizing via signed-in user
+[debug] [2018-10-02T09:09:11.482Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-10-02T09:09:11.482Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
 
-[debug] [2018-10-02T09:03:54.353Z] <<< HTTP RESPONSE 200
-[debug] [2018-10-02T09:03:54.373Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/hg006668  
+[debug] [2018-10-02T09:09:11.916Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-02T09:09:11.932Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/hg006668  
  
-[debug] [2018-10-02T09:03:55.273Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-02T09:09:12.957Z] <<< HTTP RESPONSE 200
 [info] 
 [info] === Deploying to 'hg006668'...
 [info] 
 [info] i  deploying hosting
-[debug] [2018-10-02T09:03:55.279Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/hg006668/versions  
+[debug] [2018-10-02T09:09:12.972Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/hg006668/versions  
 
-[debug] [2018-10-02T09:03:57.390Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-02T09:09:14.948Z] <<< HTTP RESPONSE 200
 [info] i  hosting[hg006668]: beginning deploy...
-[info] i  hosting[hg006668]: found 308 files in upload
-[debug] [2018-10-02T09:03:58.121Z] [hosting] hash cache [dXBsb2Fk] stored for 308 files
-[debug] [2018-10-02T09:03:58.121Z] [hosting][hash queue][FINAL]
-[debug] [2018-10-02T09:03:58.121Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/hg006668/versions/3dd7f699d7d5749e:populateFiles  
+[info] i  hosting[hg006668]: found 315 files in upload
+[debug] [2018-10-02T09:09:15.774Z] [hosting] hash cache [dXBsb2Fk] stored for 315 files
+[debug] [2018-10-02T09:09:15.774Z] [hosting][hash queue][FINAL]
+[debug] [2018-10-02T09:09:15.774Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/hg006668/versions/42946ac03d967b57:populateFiles  
  <request body omitted>
-[debug] [2018-10-02T09:04:00.959Z] <<< HTTP RESPONSE 200
-[debug] [2018-10-02T09:04:00.966Z] [hosting][populate queue][FINAL]
-[debug] [2018-10-02T09:04:00.966Z] [hosting] uploads queued: 2
+[debug] [2018-10-02T09:09:19.004Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-02T09:09:19.009Z] [hosting][populate queue][FINAL]
+[debug] [2018-10-02T09:09:19.009Z] [hosting] uploads queued: 13
