@@ -1,0 +1,5 @@
+三步骤
+1，firebase init 
+2，选择 hosting 
+3，然后选择文件夹的名称
+4，firebase deploy --only hosting
