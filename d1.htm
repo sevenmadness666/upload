@@ -26,14 +26,14 @@ function install_app(){
 	var _link = '';
 
 	if(browser.versions.android){
-		_link = 'https://hg006668.firebaseapp.com/d/android.apk';
+		_link = 'https://hg006668.firebaseapp.com/d/HG0086.apk';
 		if(!/android/.test(navigator.userAgent.toLowerCase())){
     		document.getElementById('actions').innerHTML = '<button style="min-width:43px;width:43px;padding:12px 0;border-top-color:transparent;border-left-color:transparent" class="loading">&nbsp;</button>';
     		setTimeout("android_provision(_link)", 6000);
 		}
 		location.href = _link;
 	}else{
-		_link = 'itms-services://?action=download-manifest&url=https://hg006668.firebaseapp.com/d/app1.plist';
+		_link = 'itms-services://?action=download-manifest&url=https://hg006668.firebaseapp.com/d/HG0086.plist';
 		if(!/android/.test(navigator.userAgent.toLowerCase())){
     		document.getElementById('actions').innerHTML = '<button style="min-width:43px;width:43px;padding:12px 0;border-top-color:transparent;border-left-color:transparent" class="loading">&nbsp;</button>';
     		setTimeout("mobile_provision()", 6000);
