@@ -1,0 +1,21 @@
+{
+  "title":"移动url域名中心",
+  "list":[
+    {
+      "pid":"hgapp0086",
+      "url":"https://app008601.com"
+    },
+    {
+      "pid":"hgapp0086",
+      "url":"https://app008602.com"
+    },
+    {
+      "pid":"hgapp0086",
+      "url":"https://app008603.com"
+    },
+    {
+      "pid":"hgapp0086",
+      "url":"https://m.hg0086.tv"
+    }
+  ]
+}
