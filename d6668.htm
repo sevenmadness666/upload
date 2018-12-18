@@ -65,8 +65,9 @@ function install_app(){
 						<div id="actions" class="actions">
 							<button onclick="install_app()">下载安装</button>
 						</div>
-						<p class="scan-tips">苹果手机不能打开APP，须进行如下设置： </p>
-						<div><img src="./d1_files/111.gif" style="width:70%" alt="" /></div>
+						<div class="bg_img" id="bg_img"></div>
+						<!-- <p class="scan-tips">苹果手机不能打开APP，须进行如下设置： </p>
+						<div><img src="./d1_files/111.gif" style="width:70%" alt="" /></div> -->
 					</div>
 				</div>
 			</div>
@@ -74,6 +75,25 @@ function install_app(){
 		<div class="footer"></div>
 	</div>
 </div>
-<div class="mask" style="display:none"></div>
+<div class="mask"  id="bg_img" style="display:none"></div>
+
+
+<script type="text/javascript">  
+            var ua = navigator.userAgent.toLowerCase();  
+            var isWeixin = ua.indexOf('micromessenger') != -1;  
+            var isAndroid = ua.indexOf('android') != -1;  
+            var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);  
+            // alert('aaa');
+            if (isWeixin) {  
+            // 	alert('bbb');
+            // 	if (isIos) {
+            // 	alert('ccc');
+            	var str = '<img style="position:absolute; top:0px;left:0px; width:100%" src="./d1_files/wechat1.png"/>';
+            	document.getElementById('bg_img').innerHTML = str;
+            	document.getElementById('mask').style.display = 'block';
+            		
+            //	} 
+            }  
+        </script> 
 
 </body></html>
